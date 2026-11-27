@@ -2,11 +2,11 @@
 
 **Free, open-source, offline audio player and live remix studio for ChromeOS.**
 
-![Version](https://img.shields.io/badge/version-1.33-76d7f5)
+![Version](https://img.shields.io/badge/version-1.34-76d7f5)
 ![License](https://img.shields.io/badge/license-GPL--3.0--only-blue)
 ![Runtime](https://img.shields.io/badge/runtime-local%20HTML-92dca4)
 
-**v1.33 ENGINE REFINEMENT** · Classic interface · Single HTML file · No installation
+**v1.34 ADAPTIVE ENGINE** · Classic interface · Single HTML file · No installation
 
 [Download ZIP](https://github.com/Shield-77/Shield-DJ-Lite-Web/archive/refs/heads/main.zip) · [Download HTML](https://github.com/Shield-77/Shield-DJ-Lite-Web/blob/main/index.html) · [Source history](https://github.com/Shield-77/Shield-DJ-Lite-Web/commits/main/) · [Issues](https://github.com/Shield-77/Shield-DJ-Lite-Web/issues)
 
@@ -32,7 +32,7 @@ No installer, account, subscription, server, developer mode or administrator acc
 | --- | --- |
 | Pitch and speed | Linked, 0.250x–2.000x, exact 0.001x grid; buttons and arrows advance one step. The display reads the actual browser playback rate. |
 | Quality | ORIGINAL bypass or 1–20 kHz in 1 kHz steps, Q16/PCM16 resampling adapted from Shield Theme Maker. Independent of pitch and glitch. |
-| EQ | ROCK STUDIO, POP STUDIO, POP ROCK STUDIO, Jazz, Clair, Extérieur, Classique; seven native filter nodes reused. |
+| EQ | ROCK STUDIO, POP STUDIO, POP ROCK STUDIO, AUTO STUDIO, Jazz, Clair, Extérieur, Classique; seven native filter nodes reused. |
 | BASS STUDIO | PUNCH, DEEP BASS, ROCK DRIVE, DEEP + PUNCH; separate low, impact and corrective bands. |
 | Reverb | Stereo synthesized convolution, CONCERT, CONCERT LIVE, CATHEDRALE, EXTRA and LIBRE. Optional LONG mode. |
 | Glitch Lab | Adaptive Glitch, Tape Wobble, Ghost Echo, Robot, Reverse Grains, Buffer Shatter; adjustable intensity. |
@@ -72,6 +72,16 @@ The pitch reset restores exactly 1.000x. Holding a pitch arrow repeats after 350
 **Validation for v1.33:** 63 synthetic comparisons with v1.32 at 44.1/48/96 kHz, with 23,700,600 identical stereo-channel samples across different block sizes; 15 search/sort cases over 5,000 synthetic tracks; 63 DSP regression scenarios and 15 standalone resampling tests executed in a JavaScript environment. No physical Chromebook CPU measurement or listening test was performed for this version. The browser test script was updated for the current pitch and independent glitch/quality behavior, but has not been rerun for v1.33.
 
 See [development history and prior test notes](DEVELOPMENT.md) for previous versions. Historical test results are not a current guarantee.
+
+## v1.34: adaptive engine and device benchmark
+
+AUTO STUDIO is optional. It samples the unprocessed input with a native 2048-point analyser every 250 ms, estimates six spectral bands, and gradually adjusts four existing EQ bands. Corrections are bounded between -2.5 and +2 dB depending on the band, with -4 dB headroom. It is a lightweight heuristic, not machine learning or source separation. Analysis disconnects on pause, buffering, hidden tabs and other EQ selections; the previous correction is held when analysis is paused. Track changes and seeking reset the correction.
+
+Calibration used four privately supplied tracks: 2,358 offline spectral windows and 16 isolated Chromium OfflineAudioContext renders of eight-second excerpts (eight baseline and eight adaptive). The isolated adaptive renders included -4 dB headroom; none exceeded full scale, compared with 56 above-full-scale samples in the unprocessed references. This is not a level-matched sound-quality comparison, a full player chain test, or a physical-device performance measurement. Maximum observed analyser/controller call time in that offline experiment was 0.5 ms. No audio or training data is distributed.
+
+The new TEST PERF button runs a silent synthetic benchmark only with playback paused or stopped. It measures two-second main-thread Q16/remix processing and isolated native offline EQ/convolution renders, including impulse construction time. Export the diagnostic JSON afterward. These timings are not real-time CPU utilization, underrun counts or end-to-end playback latency. No audio is played, uploaded or downloaded by the benchmark.
+
+Validation of the integrated code: JavaScript syntax, 1,002 adaptive controller checks and 11 mocked analyser lifecycle checks. CSS, Q16/remix core, bass profiles and reverb implementation match v1.33 exactly. The complete player and benchmark have not been retested on physical ChromeOS or in a real browser in this version.
 
 ## Runtime, privacy and limitations
 
