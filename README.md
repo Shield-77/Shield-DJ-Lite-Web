@@ -49,7 +49,7 @@ ROCK HD uses a 105 Hz low shelf (+2.5 dB), a 320 Hz cut (-2.5 dB), 1550 Hz (+2.4
 No telemetry, uploads, bundled songs, external fonts or runtime dependencies. The player reads user-selected files locally. Settings are saved locally where the browser allows it; the folder must be reopened after restarting. Diagnostic reports are exported by explicit user action. The provided test reports contain synthetic test data only.
 
 - [`node test-dsp.cjs`](test-dsp.cjs): 63 synthetic stereo DSP cases at 44.1/48/96 kHz, comparing 128 and 8192 frame blocks.
-- Headless Chromium tests during development: of MP3/OGG decoding, corrupt-file recovery, shuffle, date sorting, five viewport sizes, EQ response and fullscreen. The tested HTML was injected into a headless page; the physical audio output and performance on the actual Chromebook are not verified.
+- [`python test-browser.py`](test-browser.py) (requires Python, Playwright, Chromium and FFmpeg; set `CHROMIUM_PATH` if needed). Headless Chromium tests during development: of MP3/OGG decoding, corrupt-file recovery, shuffle, date sorting, five viewport sizes, EQ response and fullscreen. The tested HTML was injected into a headless page; the physical audio output and performance on the actual Chromebook are not verified.
 - The DSP test script generates `DSP-TESTS.json` locally; these are not real-device audio latency measurements.
 
 ## License
