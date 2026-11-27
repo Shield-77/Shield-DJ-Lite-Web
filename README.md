@@ -10,6 +10,15 @@
 
 [Download ZIP](https://github.com/Shield-77/Shield-DJ-Lite-Web/archive/refs/heads/main.zip) · [Download HTML](https://github.com/Shield-77/Shield-DJ-Lite-Web/blob/main/index.html) · [Source history](https://github.com/Shield-77/Shield-DJ-Lite-Web/commits/main/) · [Issues](https://github.com/Shield-77/Shield-DJ-Lite-Web/issues)
 
+## What's new in 1.42 BEAT SYNC
+
+- Faster bass-reactive SHAKE: up to 60 updates per second, shorter FFT window and improved transient detection.
+- The visualizer listens to the final processed audio, including EQ, bass shaping, quality reduction, remix, reverb, compression and volume.
+- Larger, slower VINYL display with an expandable deck.
+- Adaptive ROCK STUDIO and independent LIBRE reverb controls remain available.
+
+[Latest version details and test notes](#142-beat-sync)
+
 ## About
 
 SHIELD DJ Lite Web is a free personal project by Shield-77, made to share local music playback and creative audio effects with other users. It adapts the concepts of the original 3DS projects to native browser audio APIs, rather than emulating a console or porting its binary. Designed primarily for the **ASUS Chromebook CM14 (CM1406 series / CM1406CM4A, MediaTek Kompanio 540, 8 GB RAM, Mali-G57)**, it also targets recent Chromium-based desktop browsers.
@@ -39,6 +48,19 @@ No installer, account, subscription, server, developer mode or administrator acc
 | Audio focus | Experimental VOICE ONLY and INSTRUMENT ONLY, based on stereo and frequency filtering, not AI source separation. |
 
 CONCERT LIVE is inspired by measurements of a privately supplied concert recording. It is a synthetic room response, not a measured reconstruction of the venue. No recording is included. Smooth parameter transitions and output dynamics protection are retained; they are not a guarantee against clipping in every combination of effects.
+
+## Visual Studio
+
+| Mode | Description |
+| --- | --- |
+| SPECTRUM | Transparent 40-band frequency spectrum over the local album artwork; up to approximately 30 fps. |
+| SHAKE | Bass-transient-driven zoom and damped movement, up to 18% expansion and 60 visual updates per second. It reacts to low-frequency attacks, not isolated drum stems. |
+| VINYL | Rotating record with album artwork, 10 rpm at normal playback speed, linked to pitch. Use AGRANDIR to expand the deck; REDUIRE or Escape to restore it. |
+| STATIC | Still artwork, with animation and visual analysis disabled. |
+
+Artwork is extracted locally from supported MP3, FLAC, Ogg Vorbis and Opus metadata, or from imported JPEG, PNG and WebP files with the same track filename (without extension), or named cover, folder, front or album in the same folder. If artwork is unavailable or unsupported, the supplied SHIELD DJ Lite logo is used automatically. Embedded M4A artwork is not yet supported. No online cover lookup is used.
+
+Visual analysis is a read-only branch after the audio effects and output gain. Motion stops when playback pauses, the tab is hidden or reduced motion is requested. VINYL needs no audio analyser. Actual audio-to-screen timing depends on the device and browser.
 
 ## Library and controls
 
@@ -120,7 +142,7 @@ SHAKE now follows real 35–160 Hz bass onsets using a rolling dB reference, a s
 
 ## 1.38 Visual Studio
 
-The spare space in the effects panel now contains local cover art and four display modes: SPECTRUM (40 logarithmic bands from a native FFT after the effects and volume), SHAKE (bounded movement on bass transients), VINYL (rotating record with cover in its label, speed linked to playback rate) and STATIC (no animation or analysis). Visual updates are capped at approximately 30 fps. Animation and the analyser connection stop when paused, hidden, static, stopped or reduced-motion is requested; vinyl requires no analyser.
+The spare space in the effects panel now contains local cover art and four display modes: SPECTRUM (40 logarithmic bands from a native FFT after the effects and volume), SHAKE (bounded movement on bass transients), VINYL (rotating record with cover in its label, speed linked to playback rate) and STATIC (no animation or analysis). In v1.38, visual updates were capped at approximately 30 fps; v1.42 raises the SHAKE cap to 60 fps. Animation and the analyser connection stop when paused, hidden, static, stopped or reduced-motion is requested; vinyl requires no analyser.
 
 Artwork is read only for the selected track. Supported embedded images are MP3 ID3 APIC/PIC, FLAC PICTURE and Ogg Vorbis/Opus METADATA_BLOCK_PICTURE. Local JPEG, PNG or WebP sidecar images may also be imported alongside audio: same stem, cover, folder, front or album in the same folder. Unsupported or absent artwork falls back to the supplied SHIELD DJ Lite logo, embedded as a 2.9 KB WebP, fitted without stretching. The original source image remains unmodified; no web requests, online album lookup or third-party metadata library. Reads are capped at 4 MiB; images larger than 16 megapixels are rejected. The current artwork URL is released when tracks change. M4A embedded artwork is not yet supported; sidecars still work.
 
@@ -154,6 +176,7 @@ Validation for 1.35: JavaScript syntax checked; 15 simulated audio-graph recover
 - [index.html](index.html): complete playable source, styles and DSP.
 - [test-stability.cjs](test-stability.cjs): run with `node test-stability.cjs`; deterministic recovery and cleanup tests using audio graph doubles.
 - [test-dsp.cjs](test-dsp.cjs): run with `node test-dsp.cjs`; synthetic stereo tests and separate resampling checks.
+- [test-visual.cjs](test-visual.cjs): run with `node test-visual.cjs`; local artwork parsing, mode switching, bass onset and visual lifecycle checks.
 - [test-browser.py](test-browser.py): run with `python test-browser.py`; requires Python, Playwright, Chromium and FFmpeg. Set `CHROMIUM_PATH` if needed.
 - [DEVELOPMENT.md](DEVELOPMENT.md): historical engineering notes and limitations.
 
