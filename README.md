@@ -4,9 +4,9 @@
 
 Version **1.15 ROCK & SHATTER** · GPL-3.0-only
 
-Designed primarily for the **ASUS Chromebook CM14 (CM1406 series / CM1406CM4A, MediaTek Kompanio 540, 8 GB RAM, Mali-G57)** and ChromeOS/Chrome. It also targets modern desktop Chromium browsers. The real Chromebook is the design target; the release tests were conducted in headless Chromium and Node.js, not on that physical machine.
+Designed primarily for the **ASUS Chromebook CM14 (CM1406 series / CM1406CM4A, MediaTek Kompanio 540, 8 GB RAM, Mali-G57)** and ChromeOS/Chrome. It also targets modern desktop Chromium browsers. Shield-77 personally owns the target ASUS Chromebook and has tested the player on that physical device. Automated development tests were also conducted separately in headless Chromium and Node.js.
 
-The audio engine was built from Shield-77's own projects, [Shield DJ Lite](https://github.com/Shield-77/Shield-DJ-Lite) and [Shield Theme Maker](https://github.com/Shield-77/Shield-Theme-Maker). Their audio concepts and Q16 PCM16 resampling were adapted to the browser. The web implementation uses native browser decoding and Web Audio rather than running 3DS code. ChatGPT assisted with the web code and tests; Shield-77 chose the features and creative direction.
+The audio engine was built from Shield-77's own projects, [Shield DJ Lite](https://github.com/Shield-77/Shield-DJ-Lite) and [Shield Theme Maker](https://github.com/Shield-77/Shield-Theme-Maker). Their audio concepts and Q16 PCM16 resampling were adapted to the browser. The web implementation uses native browser decoding and Web Audio rather than running 3DS code. ChatGPT assisted with the web code and automated tests; Shield-77 chose the features and creative direction and personally tested the player on their own Chromebook.
 
 [![Repository QR code](qr.svg)](https://github.com/Shield-77/Shield-DJ-Lite-Web)
 
@@ -49,7 +49,7 @@ ROCK HD uses a 105 Hz low shelf (+2.5 dB), a 320 Hz cut (-2.5 dB), 1550 Hz (+2.4
 No telemetry, uploads, bundled songs, external fonts or runtime dependencies. The player reads user-selected files locally. Settings are saved locally where the browser allows it; the folder must be reopened after restarting. Diagnostic reports are exported by explicit user action. The provided test reports contain synthetic test data only.
 
 - [`node test-dsp.cjs`](test-dsp.cjs): 63 synthetic stereo DSP cases at 44.1/48/96 kHz, comparing 128 and 8192 frame blocks.
-- [`python test-browser.py`](test-browser.py) (requires Python, Playwright, Chromium and FFmpeg; set `CHROMIUM_PATH` if needed). Headless Chromium tests during development: of MP3/OGG decoding, corrupt-file recovery, shuffle, date sorting, five viewport sizes, EQ response and fullscreen. The tested HTML was injected into a headless page; the physical audio output and performance on the actual Chromebook are not verified.
+- [`python test-browser.py`](test-browser.py) (requires Python, Playwright, Chromium and FFmpeg; set `CHROMIUM_PATH` if needed). Headless Chromium tests during development covered MP3/OGG decoding, corrupt-file recovery, shuffle, date sorting, five viewport sizes, EQ response and fullscreen. For automated tests, the HTML was injected into a headless page. Shield-77 has also tested the player on their own physical Chromebook; no formal real-device performance benchmark is claimed.
 - The DSP test script generates `DSP-TESTS.json` locally; these are not real-device audio latency measurements.
 
 ## License
@@ -58,6 +58,6 @@ Free of charge, open source under **GNU GPL v3 only**. See [LICENSE](LICENSE), [
 
 ## Français
 
-Lecteur et laboratoire de remix entièrement local, conçu en priorité pour les Chromebook ASUS CM14. Le moteur audio a été construit à partir des concepts de mes propres projets Shield DJ Lite et Shield Theme Maker, adaptés aux API audio de Chrome. Le projet est gratuit et libre, avec le code source fourni. ChatGPT a participé au développement du port Web. Aucun abonnement ni service payant n'est nécessaire.
+Lecteur et laboratoire de remix entièrement local, conçu en priorité pour les Chromebook ASUS CM14. Je possède moi-même ce Chromebook et j'ai testé le lecteur directement sur mon propre appareil. Le moteur audio a été construit à partir des concepts de mes propres projets Shield DJ Lite et Shield Theme Maker, adaptés aux API audio de Chrome. Le projet est gratuit et libre, avec le code source fourni. ChatGPT a participé au développement du port Web. Aucun abonnement ni service payant n'est nécessaire.
 
 Ouvre `index.html`, importe un dossier MP3/OGG et lance la lecture. F = plein écran, H = Buffer Shatter, G = Glitch, flèches = fréquence/pitch. Aucun morceau n'est fourni. Les tests ne garantissent pas l'absence de microcoupures sur toutes les machines.
