@@ -2,7 +2,7 @@
 
 **Free, open-source, offline audio player and live remix studio for Chromebooks.**
 
-Version **1.24 BASS STUDIO** · GPL-3.0-only
+Version **1.25 FOCUS TUNED** · GPL-3.0-only
 
 Designed primarily for the **ASUS Chromebook CM14 (CM1406 series / CM1406CM4A, MediaTek Kompanio 540, 8 GB RAM, Mali-G57)** and ChromeOS/Chrome. It also targets modern desktop Chromium browsers. Shield-77 personally owns the target ASUS Chromebook and has tested the player on that physical device. Automated development tests were also conducted separately in headless Chromium and Node.js.
 
@@ -78,6 +78,12 @@ The diagnostic report includes browser audio context sample rate and reported ba
 The former single 180 Hz peaking filter (up to +22 dB) is replaced by three native Web Audio bands: low shelf around 85–90 Hz, kick/bass presence around 100–125 Hz, and a corrective cut at 260 Hz. Four presets: PUNCH, DEEP BASS, ROCK DRIVE and DEEP + PUNCH. Saved preset IDs are preserved. Input headroom is managed per preset (-3.5 to -6.5 dB); with bass enabled and no other heavy effects, compression is 3:1 with 10 ms attack and 120 ms release. Other heavy effects retain the prior protection settings. The OFF preset has a flat response; ROCK STUDIO without bass boost retains its previous compressor settings.
 
 Offline native Chromium measurements: 15 frequency-response cases at 44.1/48/96 kHz; 42 six-second music renders (30 new, 12 comparison), using three privately supplied tracks, with and without ROCK STUDIO. At 48 kHz, DEEP + PUNCH gives approximately +7.03 dB at 60 Hz and +4.20 dB at 125 Hz relative to 1 kHz, before compressor action. The strongest old setting produced 2,105 samples above full scale in the six comparison renders; the strongest new setting had zero, as did all 30 new renders. In this benchmark the maximum new bass-only filter gain after preset headroom was below +1.5 dB. The tests used the isolated native filter/dynamics chain, not the complete player or physical Chromebook speakers; combinations with heavy effects can differ. The three songs are not redistributed. No claims of measured device CPU use or subjective listening quality.
+
+## Focus tuning (v1.25)
+
+VOICE ONLY (approx.) now uses a 420 Hz high-pass, 6 kHz low-pass and +3.5 dB presence around 1.8 kHz, with additional gain margin. INSTRUMENT ONLY (approx.) now preserves more low-frequency center energy with a -24 dB high shelf at 500 Hz and a +20 dB recovery shelf at 7 kHz; stereo sides remain intact before output gain. These are native filters, not an AI model.
+
+Calibration used two privately supplied filtered, reverberated reference recordings of the same song. They were not verified clean stems; their shared signal exhibited an approximate 1.65-second offset. Frequency-response selection used the first 60 seconds; validation used three separate eight-second excerpts per reference from later in the song. In Chromium offline tests at 22.05 kHz, the voice preset's reference-energy contrast increased from 0.48 to 5.62 dB, and the instrument preset's contrast from 1.58 to 2.21 dB. The instrument reference itself lost 3.21 dB rather than 5.01 dB in instrument mode; the voice reference was also less attenuated, so this is a preservation tradeoff rather than stronger vocal removal. Neither updated preset exceeded full scale in the validation renders. Median rendering times were 11.85 and 11.40 ms for eight seconds of audio. No real-device or true source-separation accuracy claim is made. No music, stems or trained weights are redistributed.
 
 ## Audio notes
 
