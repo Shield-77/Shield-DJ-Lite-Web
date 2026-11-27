@@ -2,11 +2,11 @@
 
 **Free, open-source, offline audio player and live remix studio for ChromeOS.**
 
-![Version](https://img.shields.io/badge/version-1.41-76d7f5)
+![Version](https://img.shields.io/badge/version-1.42-76d7f5)
 ![License](https://img.shields.io/badge/license-GPL--3.0--only-blue)
 ![Runtime](https://img.shields.io/badge/runtime-local%20HTML-92dca4)
 
-**v1.41 LIVE IMPACT** · Classic interface · Single HTML file · No installation
+**v1.42 BEAT SYNC** · Classic interface · Single HTML file · No installation
 
 [Download ZIP](https://github.com/Shield-77/Shield-DJ-Lite-Web/archive/refs/heads/main.zip) · [Download HTML](https://github.com/Shield-77/Shield-DJ-Lite-Web/blob/main/index.html) · [Source history](https://github.com/Shield-77/Shield-DJ-Lite-Web/commits/main/) · [Issues](https://github.com/Shield-77/Shield-DJ-Lite-Web/issues)
 
@@ -87,6 +87,24 @@ Validation of the integrated code: JavaScript syntax, 1,002 adaptive controller 
 AudioWorklet is preferred. The fallback uses a ScriptProcessor buffer of 8192 frames for resampling/remix; fallback timing may differ. The app uses the system audio output, and headphone disconnection can switch sound to speakers. Start at a moderate volume, especially when using boost or headphones.
 
 No telemetry, upload, external fonts, bundled music, model weights or network requests in the standalone player. Files remain local; settings are stored in the browser when allowed. Reopen the folder after closing the browser. Diagnostic reports are exported manually. The README badges are hosted by Shields.io and are not dependencies of the HTML player.
+
+## 1.42 Beat Sync
+
+SHAKE now uses up to 60 visual updates per second, a 1024-point unsmoothed analyser at 44.1/48 kHz (2048 at higher rates), and a two-frame onset comparison with a 6 dB rise and 7 dB excess threshold. The 160 ms retrigger guard and 18% maximum zoom remain. SPECTRUM retains its 2048-point smoothed analyser and approximately 30 fps updates; VINYL and the audio graph are unchanged.
+
+Validation: Chromium OfflineAudioContext rendered the user's 115.278 s live reference through the exact native bass profiles, compressor and fixed ROCK STUDIO baseline curve at nominal 25% volume. Offline Blackman-window DFT sampling simulated the previous and new detector at 30 and 60 Hz. All four bass profiles, no effects, static ROCK baseline and combined maximum bass + static ROCK were compared.
+
+| Configuration | Previous triggers | New triggers |
+|---|---:|---:|
+| No effects | 341 | 347 |
+| PUNCH | 346 | 350 |
+| DEEP BASS | 327 | 332 |
+| ROCK DRIVE | 347 | 354 |
+| DEEP + PUNCH | 330 | 331 |
+| ROCK baseline | 342 | 351 |
+| DEEP + PUNCH + ROCK baseline | 331 | 334 |
+
+Ten synthetic bass pulses were all detected in three configurations; simulated detection time was 43 ms before and 21 ms after, including native compressor delay in the offline graph. This is measured relative to synthetic source onset at the tested frame phase, not physical audio/visual latency. Live trigger counts are not annotated kick counts. Adaptive ROCK corrections, reverb, Glitch Lab, real-time UI timing and physical device latency were not included in this rendering test. 32 mocked visual checks and 15 recovery checks passed. No source audio distributed.
 
 ## 1.41 Live Impact
 
