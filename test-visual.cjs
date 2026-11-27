@@ -36,6 +36,9 @@ for(let i=0;i<45;i++)after=api.shakeStep(state,-35,1/30);check('steady bass sett
 for(let i=0;i<10;i++)api.shakeStep(state,-78,1/30);hit=api.shakeStep(state,-55,1/30);check('quieter bass onset still reacts',hit.scale>1.1);
 for(let i=0;i<20;i++)after=api.shakeStep(state,-100,1/30);check('silence returns to rest',after.scale===1&&after.x===0);
 api.resetShake(state);check('track or pause reset',state.pulse===0&&state.age===1);
+api.resetShake(state);for(let i=0;i<30;i++)api.shakeStep(state,-75,1/30);
+api.shakeStep(state,-35,1/30);api.shakeStep(state,-75,1/30);api.shakeStep(state,-35,1/30);check('double trigger suppressed within 160 ms',state.age>0);
+for(let i=0;i<6;i++)api.shakeStep(state,-75,1/30);hit=api.shakeStep(state,-35,1/30);check('next distinct bass hit triggers',state.age===0&&hit.scale>1.1);
 return checks;
 }
 if(typeof require!=='undefined'&&typeof module!=='undefined'&&require.main===module)console.log('PASS',testVisual(fs.readFileSync(path.join(__dirname,'index.html'),'utf8')));
