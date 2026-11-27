@@ -2,7 +2,7 @@
 
 **Free, open-source, offline audio player and live remix studio for Chromebooks.**
 
-Version **1.15 ROCK & SHATTER** · GPL-3.0-only
+Version **1.16 SMART SEARCH** · GPL-3.0-only
 
 Designed primarily for the **ASUS Chromebook CM14 (CM1406 series / CM1406CM4A, MediaTek Kompanio 540, 8 GB RAM, Mali-G57)** and ChromeOS/Chrome. It also targets modern desktop Chromium browsers. Shield-77 personally owns the target ASUS Chromebook and has tested the player on that physical device. Automated development tests were also conducted separately in headless Chromium and Node.js.
 
@@ -27,7 +27,7 @@ Alternative: [download the complete ZIP](https://github.com/Shield-77/Shield-DJ-
 ## Features
 
 - Native MP3 and OGG Vorbis playback; additional formats depend on browser support.
-- Recursive folder import, shuffle without repetition within a cycle, search and newest-first sorting by modification date.
+- Recursive folder import, shuffle without repetition within a cycle, flexible case/accent-insensitive search with partial words, arbitrary word order and limited typo tolerance; newest-first sorting by modification date.
 - Pitch and speed linked, 0.25x–2x; Q16/PCM16 resampling 2–20 kHz in 1 kHz steps, plus original mode.
 - Five-band ROCK HD EQ, bass boost, audio boost, stereo convolution reverb, bitcrusher.
 - Glitch 6 kHz, Tape Wobble, Ghost Echo, Robot, Reverse Grains, and **Buffer Shatter 6 kHz**: random grain reordering, reverse, half-speed and double-speed fragments, with short crossfades and continuous transport.
@@ -43,6 +43,10 @@ Alternative: [download the complete ZIP](https://github.com/Shield-77/Shield-DJ-
 | Space | Play / pause |
 | U / O | Previous / next |
 | S / X / B | Shuffle / repeat / stop |
+
+## Smart search (v1.16)
+
+Search file names and paths using fragments or words in any order. For example, `side clickbait`, `bait`, `clikbait`, and `CLICKBAIT` all match `Clickbait - C-Side.mp3`. Accents, punctuation and case are normalized. Limited typo tolerance applies to words of five or more characters. Date sorting and shuffle remain independent. Matching is local; no music tags or online metadata are fetched.
 
 ## Audio notes
 
