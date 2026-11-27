@@ -2,7 +2,7 @@
 
 **Free, open-source, offline audio player and live remix studio for Chromebooks.**
 
-Version **1.23 PRECISION PITCH** · GPL-3.0-only
+Version **1.24 BASS STUDIO** · GPL-3.0-only
 
 Designed primarily for the **ASUS Chromebook CM14 (CM1406 series / CM1406CM4A, MediaTek Kompanio 540, 8 GB RAM, Mali-G57)** and ChromeOS/Chrome. It also targets modern desktop Chromium browsers. Shield-77 personally owns the target ASUS Chromebook and has tested the player on that physical device. Automated development tests were also conducted separately in headless Chromium and Node.js.
 
@@ -29,7 +29,7 @@ Alternative: [download the complete ZIP](https://github.com/Shield-77/Shield-DJ-
 - Native MP3 and OGG Vorbis playback; additional formats depend on browser support.
 - Recursive folder import, shuffle without repetition within a cycle, flexible case/accent-insensitive search with partial words, arbitrary word order and limited typo tolerance; newest-first sorting by modification date.
 - Pitch and speed linked, 0.25x–2x; fine 0.001x control (Shift + Left/Right or slider), regular 0.025x control, two-decimal display with a smaller third digit only when needed, and precise tooltip; Q16/PCM16 resampling 1–20 kHz in 1 kHz steps, plus original mode.
-- Seven-band ROCK STUDIO EQ, bass boost, audio boost, stereo convolution reverb, bitcrusher.
+- Seven-band ROCK STUDIO EQ, three-band BASS STUDIO, audio boost, stereo convolution reverb, bitcrusher.
 - Adaptive Glitch, Tape Wobble, Ghost Echo, Robot, Reverse Grains, and **Buffer Shatter**: signal-adaptive granular effects with transient-sensitive triggering, variable duration, random reordering and playback speeds, short crossfades and continuous transport. All effects respect the user's independent frequency selection.
 - Three-column PC layout with continuous virtual scrolling library (no pagination), current-track jump and fullscreen toggle.
 - Playback error recovery: skip unreadable files, stop when none are playable. Import does not start playback automatically.
@@ -72,6 +72,12 @@ VOICE ONLY (approx.) and INSTRUMENT ONLY (approx.) are experimental native Web A
 Offline Chromium tests of the focus graph on two privately supplied eight-second music excerpts at 48 kHz took 27–31 ms per focus render and had no samples above full scale. These measurements do not measure vocal isolation accuracy or the physical Chromebook's CPU. Synthetic tone tests found approximately -16 dB attenuation for centered 1–2.5 kHz tones in instrument mode, versus roughly -1.5 dB for side tones. No paired official vocal/instrument stems were available for validation; no model was trained. A candidate for future supervised evaluation is the [OnAir Music Dataset](https://github.com/sevagh/OnAir-Music-Dataset), by Hrag, Crescent MTL Project and SevagH, CC BY-SA 4.0. Its audio was not downloaded or used in this version. No redistribution of the privately supplied excerpts.
 
 The diagnostic report includes browser audio context sample rate and reported base/output latency when available. They are browser estimates, not measured acoustic latency.
+
+## BASS STUDIO (v1.24)
+
+The former single 180 Hz peaking filter (up to +22 dB) is replaced by three native Web Audio bands: low shelf around 85–90 Hz, kick/bass presence around 100–125 Hz, and a corrective cut at 260 Hz. Four presets: PUNCH, DEEP BASS, ROCK DRIVE and DEEP + PUNCH. Saved preset IDs are preserved. Input headroom is managed per preset (-3.5 to -6.5 dB); with bass enabled and no other heavy effects, compression is 3:1 with 10 ms attack and 120 ms release. Other heavy effects retain the prior protection settings. The OFF preset has a flat response; ROCK STUDIO without bass boost retains its previous compressor settings.
+
+Offline native Chromium measurements: 15 frequency-response cases at 44.1/48/96 kHz; 42 six-second music renders (30 new, 12 comparison), using three privately supplied tracks, with and without ROCK STUDIO. At 48 kHz, DEEP + PUNCH gives approximately +7.03 dB at 60 Hz and +4.20 dB at 125 Hz relative to 1 kHz, before compressor action. The strongest old setting produced 2,105 samples above full scale in the six comparison renders; the strongest new setting had zero, as did all 30 new renders. In this benchmark the maximum new bass-only filter gain after preset headroom was below +1.5 dB. The tests used the isolated native filter/dynamics chain, not the complete player or physical Chromebook speakers; combinations with heavy effects can differ. The three songs are not redistributed. No claims of measured device CPU use or subjective listening quality.
 
 ## Audio notes
 
