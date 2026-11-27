@@ -2,7 +2,7 @@
 
 **Free, open-source, offline audio player and live remix studio for Chromebooks.**
 
-Version **1.18 AUDIO STUDIO** · GPL-3.0-only
+Version **1.20 CONTINUOUS LIBRARY** · GPL-3.0-only
 
 Designed primarily for the **ASUS Chromebook CM14 (CM1406 series / CM1406CM4A, MediaTek Kompanio 540, 8 GB RAM, Mali-G57)** and ChromeOS/Chrome. It also targets modern desktop Chromium browsers. Shield-77 personally owns the target ASUS Chromebook and has tested the player on that physical device. Automated development tests were also conducted separately in headless Chromium and Node.js.
 
@@ -28,10 +28,10 @@ Alternative: [download the complete ZIP](https://github.com/Shield-77/Shield-DJ-
 
 - Native MP3 and OGG Vorbis playback; additional formats depend on browser support.
 - Recursive folder import, shuffle without repetition within a cycle, flexible case/accent-insensitive search with partial words, arbitrary word order and limited typo tolerance; newest-first sorting by modification date.
-- Pitch and speed linked, 0.25x–2x; fine 0.005x control (Shift + Left/Right or slider), regular 0.025x control, two-decimal display and precise tooltip; Q16/PCM16 resampling 2–20 kHz in 1 kHz steps, plus original mode.
+- Pitch and speed linked, 0.25x–2x; fine 0.005x control (Shift + Left/Right or slider), regular 0.025x control, two-decimal display and precise tooltip; Q16/PCM16 resampling 1–20 kHz in 1 kHz steps, plus original mode.
 - Seven-band ROCK STUDIO EQ, bass boost, audio boost, stereo convolution reverb, bitcrusher.
-- Glitch 6 kHz, Tape Wobble, Ghost Echo, Robot, Reverse Grains, and **Buffer Shatter 6 kHz**: random grain reordering, reverse, half-speed and double-speed fragments, with short crossfades and continuous transport.
-- Three-column PC layout with scrollable library; fullscreen toggle.
+- Adaptive Glitch, Tape Wobble, Ghost Echo, Robot, Reverse Grains, and **Buffer Shatter**: signal-adaptive granular effects with transient-sensitive triggering, variable duration, random reordering and playback speeds, short crossfades and continuous transport. All effects respect the user's independent frequency selection.
+- Three-column PC layout with continuous virtual scrolling library (no pagination), current-track jump and fullscreen toggle.
 - Playback error recovery: skip unreadable files, stop when none are playable. Import does not start playback automatically.
 
 | Key | Action |
@@ -54,6 +54,12 @@ Search file names and paths using fragments or words in any order. For example, 
 The stereo reverb synthesizes room impulses with predelay, seven groups of early reflections, independent decay bands and a smooth ending. The native browser ConvolverNode performs DSP; changing wet mix reuses the active impulse. Two cached impulses at most, with a 3 MiB cache budget at normal browser sample rates. Reverb is disconnected after its fade when disabled. CONCERT: 0.72 s, CATHEDRAL: 1.55 s, EXTRA: 2.40 s, FREE: 1.78 s; long mode multiplies these durations by 1.4.
 
 In headless Chromium at 48 kHz, the eight variants required 15–28% fewer impulse samples than v1.17. In one offline benchmark rendering six seconds of synthetic stereo audio, median render time across eight variants changed from 63.0 to 45.6 ms. These are container measurements, not Chromebook CPU utilization. Tests also checked fine pitch properties, MP3/OGG playback, cache reuse, transitions, and disconnection when disabled. File navigation was unavailable in the test environment; HTML was injected into Chromium instead. The fallback audio engine was exercised, not real Chromebook hardware output. Listening quality remains subjective.
+
+## Adaptive glitch and continuous library (v1.20)
+
+Frequency selection is independent of every glitch mode, including ORIGINAL and 1–20 kHz. Granular modes react to a fast/slow envelope detector, with randomized fallback timing, variable grain sizes and durations and nonrepeating consecutive pattern choices. This is lightweight onset detection, not a full beat tracker. Silent sections do not trigger new grains. The library displays only visible rows plus six extra rows on each side, preserving search, sort and shuffle independence. The current-track button locates the active song within the filtered list.
+
+Development validation: 63 synthetic stereo DSP scenarios across 44.1/48/96 kHz and three intensity settings, plus 15 sample-rate checks and 3 silence checks; output matched across 128 and 8192 frame chunks. 64 virtual-window bounds cases passed. These were JavaScript logic tests, not physical Chromebook listening tests.
 
 ## Audio notes
 
