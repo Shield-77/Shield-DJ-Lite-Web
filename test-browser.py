@@ -17,10 +17,11 @@ with sync_playwright() as pw:
   r['viewport'].append(v);assert v['pageHeight']<=h and v['pageWidth']<=w and all(x['lastBottom']<=x['bottom'] for x in v['panels']),v
  p.set_viewport_size({'width':1536,'height':791});r['formats']={}
  for fmt in ['mp3','ogg']:
-  p.locator('#fileInput').set_input_files(str(fixture/('shield_format.'+fmt)));p.wait_for_function('tracks.length===1');p.locator('#play').click();p.wait_for_function('!audio.paused && audio.currentTime>.15 && ctx.state==="running"');p.locator('#remix').select_option('6');p.wait_for_function('effectiveRate()===6000 && (!!graph.rateNode || graph.remixCore?.events>0)');assert p.locator('#qualityVal').inner_text()=='6 kHz GLITCH';r['formats'][fmt]=p.evaluate('({engine:metrics.rateEngine,events:graph.remixCore?.events??null,rate:effectiveRate(),mediaError:audio.error?.code||null})');assert r['formats'][fmt]['mediaError'] is None
+  p.locator('#fileInput').set_input_files(str(fixture/('shield_format.'+fmt)));p.wait_for_function('tracks.length===1');p.locator('#play').click();p.wait_for_function('!audio.paused && audio.currentTime>.15 && ctx.state==="running"');p.locator('#remix').select_option('6');p.wait_for_function('effectiveRate()===0 && (!!graph.rateNode || !!graph.rateScriptConnected)');assert p.locator('#qualityVal').inner_text()=='ORIGINALE';r['formats'][fmt]=p.evaluate('({engine:metrics.rateEngine,events:graph.remixCore?.events??null,rate:effectiveRate(),mediaError:audio.error?.code||null})');assert r['formats'][fmt]['mediaError'] is None
   p.locator('#remix').select_option('5');assert p.evaluate('p.remix===5');p.locator('#stop').click();p.locator('#reset').click()
- p.locator('#speedReset').click();p.locator('body').click(position={'x':5,'y':5});p.keyboard.press('h');assert p.evaluate('p.remix===6 && effectiveRate()===6000');p.keyboard.press('h');assert p.evaluate('p.remix===0');r['shortcut']=True
- p.locator('#remix').select_option('6');p.locator('#speedReset').click();p.keyboard.press('ArrowUp');assert p.evaluate('p.remix===0 && effectiveRate()===7000');r['quality_arrow']=True
+ p.locator('#speedReset').click();p.locator('body').click(position={'x':5,'y':5});p.keyboard.press('h');assert p.evaluate('p.remix===6 && effectiveRate()===0');p.keyboard.press('h');assert p.evaluate('p.remix===0');r['shortcut']=True
+ p.locator('#remix').select_option('6');p.locator('#quality').select_option('15');p.locator('#speedReset').click();p.keyboard.press('ArrowUp');assert p.evaluate('p.remix===6 && effectiveRate()===7000');r['quality_arrow']=True
+ p.locator('#speedReset').click();p.locator('#pitchPlus').click();assert p.evaluate('audio.playbackRate===1.001 && p.speed===1.001');assert p.locator('#speedVal').inner_text()=='1.001×';p.keyboard.press('ArrowRight');assert p.evaluate('p.speed===1.002');p.keyboard.press('Shift+ArrowLeft');assert p.evaluate('p.speed===1.001');p.locator('#speedReset').click();assert p.evaluate('audio.playbackRate===1 && p.speed===1');r['pitch_grid']=True
  p.locator('#reset').click();assert p.evaluate('p.remix===0 && p.quality===0');r['reset']=True
  p.evaluate("p.shuffle=false;syncUI()")
  Path(str(fixture/'shield_bad.mp3')).write_bytes(b'Not a valid MPEG audio file')
@@ -32,7 +33,7 @@ with sync_playwright() as pw:
  p.locator('#fileInput').set_input_files(str(fixture/'shield_format.mp3'));p.locator('#play').click();p.wait_for_function('!audio.paused && audio.currentTime>.1');p.locator('#eq').select_option('1');p.wait_for_timeout(300)
  r['rock']=p.evaluate('''()=>{const f=new Float32Array([60,105,320,1550,3400,7600,12000]),v=new Float32Array(f.length).fill(graph.eqHead.gain.value),a=new Float32Array(f.length),phase=new Float32Array(f.length);for(const n of [graph.low,graph.punch,graph.mud,graph.mid,graph.attack,graph.harsh,graph.high]){n.getFrequencyResponse(f,a,phase);for(let i=0;i<f.length;i++)v[i]*=a[i]}return {frequencies:Array.from(f),db:Array.from(v,x=>20*Math.log10(x)),headroom:graph.eqHead.gain.value,ratio:graph.comp.ratio.value}}''');assert r['rock']['db'][3]>r['rock']['db'][2] and r['rock']['headroom']<1
  p.locator('body').click(position={'x':5,'y':5});p.keyboard.press('f');p.wait_for_function('!!document.fullscreenElement');p.keyboard.press('f');p.wait_for_function('!document.fullscreenElement');r['fullscreen_f']=True
- p.locator('#search').fill('');p.keyboard.press('f');assert not p.evaluate('!!document.fullscreenElement');r['fullscreen_does_not_intercept_search']=True
+ p.locator('#search').fill('');p.locator('#search').focus();p.keyboard.press('f');assert not p.evaluate('!!document.fullscreenElement');r['fullscreen_does_not_intercept_search']=True
  p.locator('#stop').click()
  p.screenshot(path=str(fixture/'preview.png'));b.close()
 assert not errors,errors
