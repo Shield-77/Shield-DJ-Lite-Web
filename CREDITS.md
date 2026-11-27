@@ -1,12 +1,18 @@
 # Credits and licensing
 
 - **Shield-77**: original SHIELD projects, feature design, creative direction and user testing. Copyright (C) 2026 Shield-77 where applicable.
-- [Shield DJ Lite](https://github.com/Shield-77/Shield-DJ-Lite): original 3DS project and inspiration for the audio effects, controls and minimalist interface. Original project code is GPL-3.0-only; see its LICENSE and NOTICE.md.
-- [Shield Theme Maker](https://github.com/Shield-77/Shield-Theme-Maker): PCM16 Q16 linear-interpolation resampling approach adapted to streaming Web Audio from [source/audio_convert.c](https://github.com/Shield-77/Shield-Theme-Maker/blob/main/source/audio_convert.c). Original project is GPLv3. The web implementation was modified and extended on 2026-11-27.
+- [Shield DJ Lite](https://github.com/Shield-77/Shield-DJ-Lite): original 3DS project and inspiration for the audio effects, controls and minimalist interface. Original project code is GPL-3.0-only; see its [LICENSE](https://github.com/Shield-77/Shield-DJ-Lite/blob/main/LICENSE) and [NOTICE](https://github.com/Shield-77/Shield-DJ-Lite/blob/main/NOTICE.md).
+- [Shield Theme Maker](https://github.com/Shield-77/Shield-Theme-Maker): PCM16 Q16 linear-interpolation resampling approach adapted to streaming Web Audio from [source/audio_convert.c](https://github.com/Shield-77/Shield-Theme-Maker/blob/main/source/audio_convert.c). Original project is GPLv3. The web implementation was modified and extended on 2026-11-27. See the upstream [license](https://github.com/Shield-77/Shield-Theme-Maker/blob/main/LICENSE).
 - **OpenAI ChatGPT**: AI-assisted development of the web implementation, documentation and tests. The original SHIELD projects were developed with assistance from Codex. No OpenAI runtime service, model, key or SDK is included.
 - Chrome / Chromium / Web Audio / HTML media: browser-provided platform APIs; the app does not bundle the browser or its codecs. Browser components retain their own licenses. System monospace fonts are referenced, not redistributed.
-- QR image: generated for the repository URL using Python [qrcode](https://github.com/lincolnloop/python-qrcode) (BSD-3-Clause). No QR generation library is shipped or required at runtime.
+- QR image: static SVG for the repository URL. No QR generation library is shipped or required at runtime.
 - Development and tests used Node.js and Python/Playwright/FFmpeg; those tools are not bundled in the player and retain their own licenses.
+
+## Web implementation (v1.33)
+
+Native browser APIs: [Web Audio](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API), [AudioWorklet](https://developer.mozilla.org/en-US/docs/Web/API/AudioWorklet), [HTMLMediaElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement) and [File API](https://developer.mozilla.org/en-US/docs/Web/API/File_API). These are platform facilities, not bundled dependencies. The reverb impulses are synthesized by the app. No concert recordings, training data, pretrained models or game assets are shipped. Music used in private testing is not part of the distribution.
+
+The original 3DS projects retain their own attribution files. The illustration credited to **kamrikeen** in the Shield DJ Lite README is not included in this Web player. No permission to redistribute that artwork is asserted.
 
 ## Scope
 
