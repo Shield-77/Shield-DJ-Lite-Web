@@ -2,22 +2,24 @@
 
 **Free, open-source, offline audio player and live remix studio for ChromeOS.**
 
-![Version](https://img.shields.io/badge/version-1.42-76d7f5)
+![Version](https://img.shields.io/badge/version-1.43-76d7f5)
 ![License](https://img.shields.io/badge/license-GPL--3.0--only-blue)
 ![Runtime](https://img.shields.io/badge/runtime-local%20HTML-92dca4)
 
-**v1.42 BEAT SYNC** · Classic interface · Single HTML file · No installation
+**v1.43 STUDIO ROOM** · Classic interface · Single HTML file · No installation
 
 [Download ZIP](https://github.com/Shield-77/Shield-DJ-Lite-Web/archive/refs/heads/main.zip) · [Download HTML](https://github.com/Shield-77/Shield-DJ-Lite-Web/blob/main/index.html) · [Source history](https://github.com/Shield-77/Shield-DJ-Lite-Web/commits/main/) · [Issues](https://github.com/Shield-77/Shield-DJ-Lite-Web/issues)
 
-## What's new in 1.42 BEAT SYNC
+## What's new in 1.43 STUDIO ROOM
+
+- STUDIO ROOM: a new short, fully wet room preset based on Shield-77's own LIBRE settings (0.30 s, natural tone, zero pre-delay, 100% mix). Bass and EQ remain independent.
 
 - Faster bass-reactive SHAKE: up to 60 updates per second, shorter FFT window and improved transient detection.
 - The visualizer listens to the final processed audio, including EQ, bass shaping, quality reduction, remix, reverb, compression and volume.
 - Larger, slower VINYL display with an expandable deck.
 - Adaptive ROCK STUDIO and independent LIBRE reverb controls remain available.
 
-[Latest version details and test notes](#142-beat-sync)
+[Latest version details and test notes](#143-studio-room)
 
 ## About
 
@@ -43,7 +45,7 @@ No installer, account, subscription, server, developer mode or administrator acc
 | Quality | ORIGINAL bypass or 1–20 kHz in 1 kHz steps, Q16/PCM16 resampling adapted from Shield Theme Maker. Independent of pitch and glitch. |
 | EQ | ROCK STUDIO (adaptive), POP STUDIO, POP ROCK STUDIO, AUTO STUDIO, Jazz, Clair, Extérieur, Classique; seven native filter nodes reused. |
 | BASS STUDIO | PUNCH, DEEP BASS, ROCK DRIVE, DEEP + PUNCH; separate low, impact and corrective bands. |
-| Reverb | Stereo synthesized convolution, CONCERT, CONCERT LIVE, CATHEDRALE, EXTRA and LIBRE. LIBRE has independent mix (0–100%), duration (0.30–5.00 s), tone and pre-delay (0–100 ms). LONG remains available for fixed presets. |
+| Reverb | Stereo synthesized convolution, STUDIO ROOM, CONCERT, CONCERT LIVE, CATHEDRALE, EXTRA and LIBRE. LIBRE has independent mix (0–100%), duration (0.30–5.00 s), tone and pre-delay (0–100 ms). LONG remains available for fixed presets. |
 | Glitch Lab | Adaptive Glitch, Tape Wobble, Ghost Echo, Robot, Reverse Grains, Buffer Shatter; adjustable intensity. |
 | Audio focus | Experimental VOICE ONLY and INSTRUMENT ONLY, based on stereo and frequency filtering, not AI source separation. |
 
@@ -109,6 +111,12 @@ Validation of the integrated code: JavaScript syntax, 1,002 adaptive controller 
 AudioWorklet is preferred. The fallback uses a ScriptProcessor buffer of 8192 frames for resampling/remix; fallback timing may differ. The app uses the system audio output, and headphone disconnection can switch sound to speakers. Start at a moderate volume, especially when using boost or headphones.
 
 No telemetry, upload, external fonts, bundled music, model weights or network requests in the standalone player. Files remain local; settings are stored in the browser when allowed. Reopen the folder after closing the browser. Diagnostic reports are exported manually. The README badges are hosted by Shields.io and are not dependencies of the HTML player.
+
+## 1.43 Studio Room
+
+STUDIO ROOM reproduces the exact LIBRE reverb settings selected by Shield-77: 0.30 s duration, NATURAL tone, 0 ms pre-delay, 100% wet mix. It shares the same impulse generation and cache key as these LIBRE settings. The preset does not overwrite custom LIBRE preferences, bass profiles, EQ, pitch or volume. LONG is disabled for this fixed room. For the original listening combination, select DEEP + PUNCH and POP ROCK STUDIO independently. This is a synthetic room, not an acoustic measurement of a physical studio.
+
+Validation: exact room parameter equality and 112,860 identical finite impulse samples across 44.1, 48 and 96 kHz; JavaScript syntax and 15 recovery checks passed. Physical playback has not yet been verified for this version.
 
 ## 1.42 Beat Sync
 
