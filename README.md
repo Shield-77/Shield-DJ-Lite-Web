@@ -2,7 +2,7 @@
 
 **Free, open-source, offline audio player and live remix studio for Chromebooks.**
 
-Version **1.25 FOCUS TUNED** · GPL-3.0-only
+Version **1.26 EXACT PITCH** · GPL-3.0-only
 
 Designed primarily for the **ASUS Chromebook CM14 (CM1406 series / CM1406CM4A, MediaTek Kompanio 540, 8 GB RAM, Mali-G57)** and ChromeOS/Chrome. It also targets modern desktop Chromium browsers. Shield-77 personally owns the target ASUS Chromebook and has tested the player on that physical device. Automated development tests were also conducted separately in headless Chromium and Node.js.
 
@@ -28,7 +28,7 @@ Alternative: [download the complete ZIP](https://github.com/Shield-77/Shield-DJ-
 
 - Native MP3 and OGG Vorbis playback; additional formats depend on browser support.
 - Recursive folder import, shuffle without repetition within a cycle, flexible case/accent-insensitive search with partial words, arbitrary word order and limited typo tolerance; newest-first sorting by modification date.
-- Pitch and speed linked, 0.25x–2x; fine 0.001x control (Shift + Left/Right or slider), regular 0.025x control, two-decimal display with a smaller third digit only when needed, and precise tooltip; Q16/PCM16 resampling 1–20 kHz in 1 kHz steps, plus original mode.
+- Pitch and speed linked, 0.25x–2x; fine 0.001x control (Shift + Left/Right or slider), regular 0.025x control, fixed three-decimal display, with a green indicator at exactly 1.000x; Q16/PCM16 resampling 1–20 kHz in 1 kHz steps, plus original mode.
 - Seven-band ROCK STUDIO EQ, three-band BASS STUDIO, audio boost, stereo convolution reverb, bitcrusher.
 - Adaptive Glitch, Tape Wobble, Ghost Echo, Robot, Reverse Grains, and **Buffer Shatter**: signal-adaptive granular effects with transient-sensitive triggering, variable duration, random reordering and playback speeds, short crossfades and continuous transport. All effects respect the user's independent frequency selection.
 - Three-column PC layout with continuous virtual scrolling library (no pagination), current-track jump and fullscreen toggle.
@@ -84,6 +84,10 @@ Offline native Chromium measurements: 15 frequency-response cases at 44.1/48/96 
 VOICE ONLY (approx.) now uses a 420 Hz high-pass, 6 kHz low-pass and +3.5 dB presence around 1.8 kHz, with additional gain margin. INSTRUMENT ONLY (approx.) now preserves more low-frequency center energy with a -24 dB high shelf at 500 Hz and a +20 dB recovery shelf at 7 kHz; stereo sides remain intact before output gain. These are native filters, not an AI model.
 
 Calibration used two privately supplied filtered, reverberated reference recordings of the same song. They were not verified clean stems; their shared signal exhibited an approximate 1.65-second offset. Frequency-response selection used the first 60 seconds; validation used three separate eight-second excerpts per reference from later in the song. In Chromium offline tests at 22.05 kHz, the voice preset's reference-energy contrast increased from 0.48 to 5.62 dB, and the instrument preset's contrast from 1.58 to 2.21 dB. The instrument reference itself lost 3.21 dB rather than 5.01 dB in instrument mode; the voice reference was also less attenuated, so this is a preservation tradeoff rather than stronger vocal removal. Neither updated preset exceeded full scale in the validation renders. Median rendering times were 11.85 and 11.40 ms for eight seconds of audio. No real-device or true source-separation accuracy claim is made. No music, stems or trained weights are redistributed.
+
+## Exact pitch (v1.26)
+
+Pitch always shows four digits (three decimal places), e.g. 0.999x, 1.000x, 1.001x. At exactly 1.000x the indicator and reset button turn green. Fine step remains 0.001x and normal step 0.025x. Eight JavaScript checks passed for display, exact rate, indicator state and limits. Physical-device rendering was not tested.
 
 ## Audio notes
 
