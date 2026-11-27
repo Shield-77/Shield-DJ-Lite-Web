@@ -2,7 +2,7 @@
 
 **Free, open-source, offline audio player and live remix studio for Chromebooks.**
 
-Version **1.31 STUDIO UI** · GPL-3.0-only
+Version **1.32 CLASSIC UI** · GPL-3.0-only
 
 Designed primarily for the **ASUS Chromebook CM14 (CM1406 series / CM1406CM4A, MediaTek Kompanio 540, 8 GB RAM, Mali-G57)** and ChromeOS/Chrome. It also targets modern desktop Chromium browsers. Shield-77 personally owns the target ASUS Chromebook and has tested the player on that physical device. Automated development tests were also conducted separately in headless Chromium and Node.js.
 
@@ -31,7 +31,7 @@ Alternative: [download the complete ZIP](https://github.com/Shield-77/Shield-DJ-
 - Pitch and speed linked, 0.25x–2x; uniform 0.001x steps with buttons and arrow keys (also with Shift), a 0.001x slider grid, fixed three-decimal display on that grid reading the actual media playback rate, with a green indicator at exactly 1.000x; Q16/PCM16 resampling 1–20 kHz in 1 kHz steps, plus original mode.
 - Seven-band ROCK STUDIO EQ, three-band BASS STUDIO, audio boost, stereo convolution reverb, bitcrusher.
 - Adaptive Glitch, Tape Wobble, Ghost Echo, Robot, Reverse Grains, and **Buffer Shatter**: signal-adaptive granular effects with transient-sensitive triggering, variable duration, random reordering and playback speeds, short crossfades and continuous transport. All effects respect the user's independent frequency selection.
-- Rounded, modern three-column PC layout with continuous virtual scrolling library (no pagination), current-track jump and fullscreen toggle.
+- Classic compact three-column PC layout with continuous virtual scrolling library (no pagination), current-track jump and fullscreen toggle.
 - Playback error recovery: skip unreadable files, stop when none are playable. Import does not start playback automatically.
 
 | Key | Action |
@@ -116,6 +116,10 @@ Pitch now uses a single integer thousandths grid: every +/- button press or arro
 Performance changes: avoid rescheduling unchanged EQ/bass/gain/compressor/crush parameters, debounce search by 100 ms (Enter applies immediately), use a filtered-index map for current-track lookup, cache row labels and avoid unchanged seek-control writes. No new audio nodes or DSP loop.
 
 Validation: 3,506 mock JavaScript pitch checks covering the complete 1,751-value grid in both directions, bounds, migration and reset; 64 virtual-window cases (up to 5,000 tracks), and targeted mock audio-update tests showing zero parameter writes on an unchanged update and only one on a volume-only change. JavaScript syntax and 63 unique HTML IDs checked. Browser rendering, physical Chromebook audio and CPU performance were not measured for this version.
+
+## CLASSIC UI (v1.32)
+
+Restores the original v1.30 visual style and panel headings at the owner's request. All v1.31 pitch-grid and performance improvements remain intact. Verified that the CSS is identical to v1.30 and the JavaScript matches v1.31 except for the version label; syntax checked. No new physical-device tests.
 
 ## Audio notes
 
