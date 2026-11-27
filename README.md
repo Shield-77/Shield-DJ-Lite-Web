@@ -2,7 +2,7 @@
 
 **Free, open-source, offline audio player and live remix studio for Chromebooks.**
 
-Version **1.22 LIBRARY FIX** · GPL-3.0-only
+Version **1.23 PRECISION PITCH** · GPL-3.0-only
 
 Designed primarily for the **ASUS Chromebook CM14 (CM1406 series / CM1406CM4A, MediaTek Kompanio 540, 8 GB RAM, Mali-G57)** and ChromeOS/Chrome. It also targets modern desktop Chromium browsers. Shield-77 personally owns the target ASUS Chromebook and has tested the player on that physical device. Automated development tests were also conducted separately in headless Chromium and Node.js.
 
@@ -28,7 +28,7 @@ Alternative: [download the complete ZIP](https://github.com/Shield-77/Shield-DJ-
 
 - Native MP3 and OGG Vorbis playback; additional formats depend on browser support.
 - Recursive folder import, shuffle without repetition within a cycle, flexible case/accent-insensitive search with partial words, arbitrary word order and limited typo tolerance; newest-first sorting by modification date.
-- Pitch and speed linked, 0.25x–2x; fine 0.005x control (Shift + Left/Right or slider), regular 0.025x control, two-decimal display with a smaller third digit only when needed, and precise tooltip; Q16/PCM16 resampling 1–20 kHz in 1 kHz steps, plus original mode.
+- Pitch and speed linked, 0.25x–2x; fine 0.001x control (Shift + Left/Right or slider), regular 0.025x control, two-decimal display with a smaller third digit only when needed, and precise tooltip; Q16/PCM16 resampling 1–20 kHz in 1 kHz steps, plus original mode.
 - Seven-band ROCK STUDIO EQ, bass boost, audio boost, stereo convolution reverb, bitcrusher.
 - Adaptive Glitch, Tape Wobble, Ghost Echo, Robot, Reverse Grains, and **Buffer Shatter**: signal-adaptive granular effects with transient-sensitive triggering, variable duration, random reordering and playback speeds, short crossfades and continuous transport. All effects respect the user's independent frequency selection.
 - Three-column PC layout with continuous virtual scrolling library (no pagination), current-track jump and fullscreen toggle.
@@ -38,7 +38,7 @@ Alternative: [download the complete ZIP](https://github.com/Shield-77/Shield-DJ-
 | --- | --- |
 | F | Fullscreen on/off |
 | Left / Right | Linked pitch and speed (0.025x) |
-| Shift + Left / Right | Fine linked pitch and speed (0.005x) |
+| Shift + Left / Right | Fine linked pitch and speed (0.001x) |
 | Up / Down | Audio rate (1 kHz steps) |
 | G / H | Glitch / Buffer Shatter toggle |
 | Space | Play / pause |
@@ -97,4 +97,4 @@ Lecteur et laboratoire de remix entièrement local, conçu en priorité pour les
 
 Le filtre ROCK STUDIO utilise sept bandes natives, une marge de 5 dB et une compression plus douce lorsque les effets lourds sont désactivés. Il privilégie les impacts de batterie et la présence des guitares sans amplifier exagérément les aigus.
 
-Ouvre `index.html`, importe un dossier MP3/OGG et lance la lecture. F = plein écran, H = Buffer Shatter, G = Glitch, flèches = fréquence/pitch. Maj + gauche/droite = pas fin de 0,005× (valeur exacte dans l’infobulle). Aucun morceau n'est fourni. Les tests ne garantissent pas l'absence de microcoupures sur toutes les machines.
+Ouvre `index.html`, importe un dossier MP3/OGG et lance la lecture. F = plein écran, H = Buffer Shatter, G = Glitch, flèches = fréquence/pitch. Maj + gauche/droite = pas fin de 0,001× (valeur exacte dans l’infobulle). Aucun morceau n'est fourni. Les tests ne garantissent pas l'absence de microcoupures sur toutes les machines.
