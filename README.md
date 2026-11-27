@@ -2,11 +2,11 @@
 
 **Free, open-source, offline audio player and live remix studio for ChromeOS.**
 
-![Version](https://img.shields.io/badge/version-1.38-76d7f5)
+![Version](https://img.shields.io/badge/version-1.39-76d7f5)
 ![License](https://img.shields.io/badge/license-GPL--3.0--only-blue)
 ![Runtime](https://img.shields.io/badge/runtime-local%20HTML-92dca4)
 
-**v1.38 VISUAL STUDIO** · Classic interface · Single HTML file · No installation
+**v1.39 BASS IMPACT** · Classic interface · Single HTML file · No installation
 
 [Download ZIP](https://github.com/Shield-77/Shield-DJ-Lite-Web/archive/refs/heads/main.zip) · [Download HTML](https://github.com/Shield-77/Shield-DJ-Lite-Web/blob/main/index.html) · [Source history](https://github.com/Shield-77/Shield-DJ-Lite-Web/commits/main/) · [Issues](https://github.com/Shield-77/Shield-DJ-Lite-Web/issues)
 
@@ -87,6 +87,10 @@ Validation of the integrated code: JavaScript syntax, 1,002 adaptive controller 
 AudioWorklet is preferred. The fallback uses a ScriptProcessor buffer of 8192 frames for resampling/remix; fallback timing may differ. The app uses the system audio output, and headphone disconnection can switch sound to speakers. Start at a moderate volume, especially when using boost or headphones.
 
 No telemetry, upload, external fonts, bundled music, model weights or network requests in the standalone player. Files remain local; settings are stored in the browser when allowed. Reopen the folder after closing the browser. Diagnostic reports are exported manually. The README badges are hosted by Shields.io and are not dependencies of the HTML player.
+
+## 1.39 Bass Impact
+
+SHAKE now follows real 35–160 Hz bass onsets using a rolling dB reference, a short refractory period and a damped rebound. Each hit expands the artwork by up to 18% and adds bounded, alternating movement, with margins to keep the image visible. Sustained bass settles instead of producing constant artificial motion. No flashes, no change to the audio path; the existing reduced-motion and STATIC settings remain available. 22 simulated visual/parser tests pass, including loud and quieter onsets, damping, silence and mode switching. Perceived synchronization and appearance still require physical-device testing.
 
 ## 1.38 Visual Studio
 
