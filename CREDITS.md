@@ -15,3 +15,19 @@ The app's own source is distributed under **GNU GPL version 3 only** (SPDX: GPL-
 For the upstream third-party notices, consult the original [Shield DJ Lite credits](https://github.com/Shield-77/Shield-DJ-Lite#licence-et-cr%C3%A9dits) and [Shield Theme Maker README](https://github.com/Shield-77/Shield-Theme-Maker/blob/main/README.md). Thanks to those authors and contributors. The software does not grant rights to any songs imported by users or trademarks of third parties. No official affiliation with browser or hardware vendors is claimed.
 
 The SHIELD name identifies the original project; modified versions should identify their changes and not imply official endorsement. This is not an additional restriction on the rights granted by the GPL.
+
+## Acknowledgements for the original 3DS projects
+
+The following contributors are credited in the upstream projects. These are acknowledgements of their contributions to the original ecosystem, not a claim that their code is included in this Web player:
+
+| Project / contributor | Upstream license or role |
+| --- | --- |
+| [minimp3](https://github.com/lieff/minimp3), lieff and contributors | CC0 1.0; MP3 decoding |
+| [Tremor](https://gitlab.xiph.org/xiph/tremor) and [libogg](https://gitlab.xiph.org/xiph/ogg), Xiph.Org Foundation and contributors | BSD-style licenses; Ogg/Vorbis support |
+| [stb](https://github.com/nothings/stb), Sean Barrett and contributors | MIT or public-domain terms; image processing |
+| [Atkinson Hyperlegible](https://www.brailleinstitute.org/freefont/), Braille Institute of America | SIL Open Font License 1.1 |
+| [devkitPro](https://github.com/devkitPro), including devkitARM and libctru contributors | 3DS development tools and libraries, under their respective licenses |
+| [Kame Tools](https://gitlab.com/beelzy/kame-tools), beelzy and contributors | Reference and tool for theme structure; no direct code reuse claimed |
+| [Anemone3DS](https://github.com/astronautlevel2/Anemone3DS), developers and contributors | Theme installation ecosystem; not integrated here |
+
+See the original repositories for their complete license texts. Thank you to everyone who makes these free projects possible.
