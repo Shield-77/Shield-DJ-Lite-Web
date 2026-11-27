@@ -2,7 +2,7 @@
 
 **Free, open-source, offline audio player and live remix studio for Chromebooks.**
 
-Version **1.28 POP STUDIO** · GPL-3.0-only
+Version **1.29 POP ROCK STUDIO** · GPL-3.0-only
 
 Designed primarily for the **ASUS Chromebook CM14 (CM1406 series / CM1406CM4A, MediaTek Kompanio 540, 8 GB RAM, Mali-G57)** and ChromeOS/Chrome. It also targets modern desktop Chromium browsers. Shield-77 personally owns the target ASUS Chromebook and has tested the player on that physical device. Automated development tests were also conducted separately in headless Chromium and Node.js.
 
@@ -94,6 +94,10 @@ The display reads the media element playbackRate and always shows four decimals.
 POP STUDIO uses the existing seven native equalizer nodes: low shelf +1.8 dB at 90 Hz, +1.4 dB at 125 Hz, -2 dB at 320 Hz, +0.6 dB at 950 Hz, +2.1 dB at 2.45 kHz, -1.6 dB at 5.3 kHz and high shelf +2.4 dB at 10 kHz. A -4 dB gain margin and a 2:1 compressor (when other heavy effects and bass boost are disabled) help preserve dynamics. EQ transitions use 45 ms native parameter time constants (approximately 135 ms to reach 95% of the target); stereo focus gain transitions use 25 ms time constants. No extra DSP loop or music files are bundled. These are effect changes, not track crossfades.
 
 Validation: 180 mock EQ parameter checks across nine preset selections and 6,144 analytically calculated frequency-response points at 44.1/48/96 kHz. Maximum POP EQ response after gain margin was -1.60, -1.60 and -1.69 dB respectively. These are steady-state analytical filter predictions, not real Chromebook audio, CPU or clipping measurements; combined effects may behave differently.
+
+## POP ROCK STUDIO (v1.29)
+
+Independent hybrid EQ combining POP STUDIO and ROCK STUDIO characteristics. Seven existing native EQ nodes, +2.4 dB punch at 130 Hz, -2.6 dB at 315 Hz, +1.2 dB at 1.05 kHz, +2.8 dB presence at 2.55 kHz and +2.2 dB high shelf at 9.5 kHz, with -4.5 dB headroom. Smooth 45 ms parameter time constants retained. Bass, reverb, pitch and existing EQ profiles are unchanged. The new profile does not activate the voice/instrument focus path. Validation: 220 mock parameter checks across 11 preset selections, two compressor checks and 6,144 analytical frequency-response points across 44.1/48/96 kHz. Maximum predicted steady-state response after headroom: -1.61/-1.61/-1.62 dB respectively. Not a real audio render, listening test or physical Chromebook performance measurement.
 
 ## Audio notes
 
