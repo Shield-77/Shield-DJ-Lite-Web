@@ -2,7 +2,7 @@
 
 **Free, open-source, offline audio player and live remix studio for Chromebooks.**
 
-Version **1.30 CONCERT LIVE** · GPL-3.0-only
+Version **1.31 STUDIO UI** · GPL-3.0-only
 
 Designed primarily for the **ASUS Chromebook CM14 (CM1406 series / CM1406CM4A, MediaTek Kompanio 540, 8 GB RAM, Mali-G57)** and ChromeOS/Chrome. It also targets modern desktop Chromium browsers. Shield-77 personally owns the target ASUS Chromebook and has tested the player on that physical device. Automated development tests were also conducted separately in headless Chromium and Node.js.
 
@@ -28,17 +28,17 @@ Alternative: [download the complete ZIP](https://github.com/Shield-77/Shield-DJ-
 
 - Native MP3 and OGG Vorbis playback; additional formats depend on browser support.
 - Recursive folder import, shuffle without repetition within a cycle, flexible case/accent-insensitive search with partial words, arbitrary word order and limited typo tolerance; newest-first sorting by modification date.
-- Pitch and speed linked, 0.25x–2x; fine 0.0001x control (Shift + Left/Right or slider), regular 0.001x control, fixed four-decimal display reflecting the actual media playback rate, with a green indicator at exactly 1.0000x; Q16/PCM16 resampling 1–20 kHz in 1 kHz steps, plus original mode.
+- Pitch and speed linked, 0.25x–2x; uniform 0.001x steps with buttons and arrow keys (also with Shift), a 0.001x slider grid, fixed three-decimal display on that grid reading the actual media playback rate, with a green indicator at exactly 1.000x; Q16/PCM16 resampling 1–20 kHz in 1 kHz steps, plus original mode.
 - Seven-band ROCK STUDIO EQ, three-band BASS STUDIO, audio boost, stereo convolution reverb, bitcrusher.
 - Adaptive Glitch, Tape Wobble, Ghost Echo, Robot, Reverse Grains, and **Buffer Shatter**: signal-adaptive granular effects with transient-sensitive triggering, variable duration, random reordering and playback speeds, short crossfades and continuous transport. All effects respect the user's independent frequency selection.
-- Three-column PC layout with continuous virtual scrolling library (no pagination), current-track jump and fullscreen toggle.
+- Rounded, modern three-column PC layout with continuous virtual scrolling library (no pagination), current-track jump and fullscreen toggle.
 - Playback error recovery: skip unreadable files, stop when none are playable. Import does not start playback automatically.
 
 | Key | Action |
 | --- | --- |
 | F | Fullscreen on/off |
 | Left / Right | Linked pitch and speed (0.001x) |
-| Shift + Left / Right | Fine linked pitch and speed (0.0001x) |
+| Shift + Left / Right | Same linked pitch and speed step (0.001x) |
 | Up / Down | Audio rate (1 kHz steps) |
 | G / H | Glitch / Buffer Shatter toggle |
 | Space | Play / pause |
@@ -107,6 +107,16 @@ Reference: a privately supplied MP3 of a concert performance. Its measured side/
 
 Validation: 16 native Chromium OfflineAudioContext renders of four eight-second excerpts (wet-only and dry+wet, old and new modes), isolated reverb stage without EQ, bass boost or compressor. Median wet-only 40–150 Hz energy relative to source changed from -11.38 to -21.06 dB, while 300–4800 Hz changed from -9.53 to -9.09 dB. Median dry+wet render time was 53.75 ms vs 70.55 ms. The decoded MP3 itself exceeded full scale (peak 1.1005); dry+wet test samples above full scale decreased from 54 to 10 across the four excerpts, but were not eliminated. Thirty additional impulse-generation checks covered all five enabled reverb presets at 44.1/48/96 kHz with and without LONG. The LIVE impulse occupies 441600 bytes at 48 kHz, or 618240 bytes in LONG mode. These tests do not measure actual Chromebook CPU use, complete playback-chain clipping, or subjective quality. No source music is redistributed.
 
+## STUDIO UI (v1.31)
+
+Modern rounded panels, pill-shaped transport buttons and search, system sans-serif fonts, clearer selected tracks, no external assets, no animated backgrounds or blur. Desktop retains the compact three-column layout and 44 px virtual library rows. All audio presets and the reverb algorithms remain unchanged.
+
+Pitch now uses a single integer thousandths grid: every +/- button press or arrow-key step changes the rate by exactly 0.001x, including with Shift. Holding the arrow repeats every 110 ms after an initial 350 ms delay. Previous four-decimal preferences are rounded to the closest grid point. A mouse click or drag on the slider can intentionally skip several positions, while the buttons and arrow keys provide exact one-step control. Display reads playbackRate rather than a guessed pitch. Reset cancels repeat and restores 1.000x.
+
+Performance changes: avoid rescheduling unchanged EQ/bass/gain/compressor/crush parameters, debounce search by 100 ms (Enter applies immediately), use a filtered-index map for current-track lookup, cache row labels and avoid unchanged seek-control writes. No new audio nodes or DSP loop.
+
+Validation: 3,506 mock JavaScript pitch checks covering the complete 1,751-value grid in both directions, bounds, migration and reset; 64 virtual-window cases (up to 5,000 tracks), and targeted mock audio-update tests showing zero parameter writes on an unchanged update and only one on a volume-only change. JavaScript syntax and 63 unique HTML IDs checked. Browser rendering, physical Chromebook audio and CPU performance were not measured for this version.
+
 ## Audio notes
 
 AudioWorklet is preferred. If unavailable, the player falls back to a ScriptProcessor buffer of 8192 frames, using the same DSP core. This fallback may have more control latency or occasional dropouts. The browser may mute very slow playback on some platforms. The app uses the system audio output: unplugging headphones can switch sound to speakers. Start with a low volume, especially with distortion, boost and headphones.
@@ -131,4 +141,4 @@ Lecteur et laboratoire de remix entièrement local, conçu en priorité pour les
 
 Le filtre ROCK STUDIO utilise sept bandes natives, une marge de 5 dB et une compression plus douce lorsque les effets lourds sont désactivés. Il privilégie les impacts de batterie et la présence des guitares sans amplifier exagérément les aigus.
 
-Ouvre `index.html`, importe un dossier MP3/OGG et lance la lecture. F = plein écran, H = Buffer Shatter, G = Glitch, flèches = fréquence/pitch. Maj + gauche/droite = pas fin de 0,001× (valeur exacte dans l’infobulle). Aucun morceau n'est fourni. Les tests ne garantissent pas l'absence de microcoupures sur toutes les machines.
+Ouvre `index.html`, importe un dossier MP3/OGG et lance la lecture. F = plein écran, H = Buffer Shatter, G = Glitch, flèches = fréquence/pitch. Gauche/droite et boutons −/+ = exactement un pas de 0,001×. Maj ne change plus la précision. Aucun morceau n'est fourni. Les tests ne garantissent pas l'absence de microcoupures sur toutes les machines.
