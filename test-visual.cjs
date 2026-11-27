@@ -11,7 +11,7 @@ const flac=Uint8Array.from([102,76,97,67,134,0,0,picture.length,...picture]);
 const element=()=>({src:'data:image/webp;base64,logo',style:{},dataset:{mode:'spectrum'},clientHeight:180,clientWidth:320,width:640,height:260,getContext:()=>({clearRect(){},fillRect(){}})});
 const elements={},$=id=>elements[id]??(elements[id]=element());
 let queued=0,connected=0,disconnected=0;
-const graph={gate:{connect(){connected++},disconnect(){disconnected++}}},ctx={state:'running',sampleRate:48000,createAnalyser(){return {frequencyBinCount:1024,getFloatFrequencyData(a){a.fill(-45)}}}},audio={paused:false,playbackRate:1},document={hidden:false},p={visualMode:'spectrum'},env={graph,ctx,audio,document,p,$,requestAnimationFrame:()=>++queued,cancelAnimationFrame:()=>{},matchMedia:()=>({matches:false})};
+const graph={gate:{connect(){connected++},disconnect(){disconnected++}}},ctx={state:'running',sampleRate:48000,createAnalyser(){return {frequencyBinCount:1024,getFloatFrequencyData(a){a.fill(-45)}}}},audio={paused:false,playbackRate:1,readyState:4},document={hidden:false},p={visualMode:'spectrum'},env={graph,ctx,audio,document,p,$,requestAnimationFrame:()=>++queued,cancelAnimationFrame:()=>{},matchMedia:()=>({matches:false})};
 const api=new Function('e','const {graph,ctx,audio,document,p,$,requestAnimationFrame,cancelAnimationFrame,matchMedia}=e;let stopped=false;'+html.slice(a,b)+';return {parseCover,coverMime,makeVisualBins,syncVisual,stopVisual,visualTick,visualAllowed,active:()=>visualRunning,angle:()=>visualAngle};')(env);
 const checks=[];function check(name,ok){if(!ok)throw Error(name);checks.push(name)}
 check('ID3 APIC',api.coverMime(api.parseCover(id3))==='image/png');
