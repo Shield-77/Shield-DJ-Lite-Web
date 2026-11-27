@@ -2,7 +2,7 @@
 
 **Free, open-source, offline audio player and live remix studio for Chromebooks.**
 
-Version **1.20 CONTINUOUS LIBRARY** · GPL-3.0-only
+Version **1.21 AUDIO FOCUS** · GPL-3.0-only
 
 Designed primarily for the **ASUS Chromebook CM14 (CM1406 series / CM1406CM4A, MediaTek Kompanio 540, 8 GB RAM, Mali-G57)** and ChromeOS/Chrome. It also targets modern desktop Chromium browsers. Shield-77 personally owns the target ASUS Chromebook and has tested the player on that physical device. Automated development tests were also conducted separately in headless Chromium and Node.js.
 
@@ -28,7 +28,7 @@ Alternative: [download the complete ZIP](https://github.com/Shield-77/Shield-DJ-
 
 - Native MP3 and OGG Vorbis playback; additional formats depend on browser support.
 - Recursive folder import, shuffle without repetition within a cycle, flexible case/accent-insensitive search with partial words, arbitrary word order and limited typo tolerance; newest-first sorting by modification date.
-- Pitch and speed linked, 0.25x–2x; fine 0.005x control (Shift + Left/Right or slider), regular 0.025x control, two-decimal display and precise tooltip; Q16/PCM16 resampling 1–20 kHz in 1 kHz steps, plus original mode.
+- Pitch and speed linked, 0.25x–2x; fine 0.005x control (Shift + Left/Right or slider), regular 0.025x control, two-decimal display with a smaller third digit only when needed, and precise tooltip; Q16/PCM16 resampling 1–20 kHz in 1 kHz steps, plus original mode.
 - Seven-band ROCK STUDIO EQ, bass boost, audio boost, stereo convolution reverb, bitcrusher.
 - Adaptive Glitch, Tape Wobble, Ghost Echo, Robot, Reverse Grains, and **Buffer Shatter**: signal-adaptive granular effects with transient-sensitive triggering, variable duration, random reordering and playback speeds, short crossfades and continuous transport. All effects respect the user's independent frequency selection.
 - Three-column PC layout with continuous virtual scrolling library (no pagination), current-track jump and fullscreen toggle.
@@ -60,6 +60,14 @@ In headless Chromium at 48 kHz, the eight variants required 15–28% fewer impul
 Frequency selection is independent of every glitch mode, including ORIGINAL and 1–20 kHz. Granular modes react to a fast/slow envelope detector, with randomized fallback timing, variable grain sizes and durations and nonrepeating consecutive pattern choices. This is lightweight onset detection, not a full beat tracker. Silent sections do not trigger new grains. The library displays only visible rows plus six extra rows on each side, preserving search, sort and shuffle independence. The current-track button locates the active song within the filtered list.
 
 Development validation: 63 synthetic stereo DSP scenarios across 44.1/48/96 kHz and three intensity settings, plus 15 sample-rate checks and 3 silence checks; output matched across 128 and 8192 frame chunks. 64 virtual-window bounds cases passed. These were JavaScript logic tests, not physical Chromebook listening tests.
+
+## Audio focus (v1.21)
+
+VOICE ONLY (approx.) and INSTRUMENT ONLY (approx.) are experimental native Web Audio presets, not AI stem separation. Voice focus emphasizes the stereo center in the 155 Hz–6.9 kHz range. Instrument focus reduces the center's vocal-frequency region, retaining stereo sides and more bass and treble. Centered instruments and off-center vocals can still be affected. Use ORIGINAL quality for the best available source fidelity; reduced sample rates are creative effects. No training data, model weights, or music files are bundled.
+
+Offline Chromium tests of the focus graph on two privately supplied eight-second music excerpts at 48 kHz took 27–31 ms per focus render and had no samples above full scale. These measurements do not measure vocal isolation accuracy or the physical Chromebook's CPU. Synthetic tone tests found approximately -16 dB attenuation for centered 1–2.5 kHz tones in instrument mode, versus roughly -1.5 dB for side tones. No paired official vocal/instrument stems were available for validation; no model was trained. A candidate for future supervised evaluation is the [OnAir Music Dataset](https://github.com/sevagh/OnAir-Music-Dataset), by Hrag, Crescent MTL Project and SevagH, CC BY-SA 4.0. Its audio was not downloaded or used in this version. No redistribution of the privately supplied excerpts.
+
+The diagnostic report includes browser audio context sample rate and reported base/output latency when available. They are browser estimates, not measured acoustic latency.
 
 ## Audio notes
 
