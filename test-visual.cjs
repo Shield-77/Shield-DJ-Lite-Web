@@ -11,8 +11,8 @@ const flac=Uint8Array.from([102,76,97,67,134,0,0,picture.length,...picture]);
 const element=()=>({src:'data:image/webp;base64,logo',style:{},dataset:{mode:'spectrum'},clientHeight:180,clientWidth:320,width:640,height:260,getContext:()=>({clearRect(){},fillRect(){}})});
 const elements={},$=id=>elements[id]??(elements[id]=element());
 let queued=0,connected=0,disconnected=0;
-const graph={gate:{connect(){connected++},disconnect(){disconnected++}}},ctx={state:'running',sampleRate:48000,createAnalyser(){return {frequencyBinCount:1024,getFloatFrequencyData(a){a.fill(-45)}}}},audio={paused:false,playbackRate:1,readyState:4},document={hidden:false},p={visualMode:'spectrum'},env={graph,ctx,audio,document,p,$,requestAnimationFrame:()=>++queued,cancelAnimationFrame:()=>{},matchMedia:()=>({matches:false})};
-const api=new Function('e','const {graph,ctx,audio,document,p,$,requestAnimationFrame,cancelAnimationFrame,matchMedia}=e;let stopped=false;'+html.slice(a,b)+';return {parseCover,coverMime,makeVisualBins,syncVisual,stopVisual,visualTick,visualAllowed,active:()=>visualRunning,angle:()=>visualAngle};')(env);
+const graph={gate:{connect(){connected++},disconnect(){disconnected++}}},ctx={state:'running',sampleRate:48000,createAnalyser(){return {fftSize:2048,frequencyBinCount:1024,getFloatFrequencyData(a){a.fill(-45)}}}},audio={paused:false,playbackRate:1,readyState:4},document={hidden:false},p={visualMode:'spectrum'},env={graph,ctx,audio,document,p,$,requestAnimationFrame:()=>++queued,cancelAnimationFrame:()=>{},matchMedia:()=>({matches:false})};
+const api=new Function('e','const {graph,ctx,audio,document,p,$,requestAnimationFrame,cancelAnimationFrame,matchMedia}=e;let stopped=false;'+html.slice(a,b)+';return {shakeStep,resetShake,parseCover,coverMime,makeVisualBins,syncVisual,stopVisual,visualTick,visualAllowed,active:()=>visualRunning,angle:()=>visualAngle};')(env);
 const checks=[];function check(name,ok){if(!ok)throw Error(name);checks.push(name)}
 check('ID3 APIC',api.coverMime(api.parseCover(id3))==='image/png');
 check('FLAC PICTURE',api.coverMime(api.parseCover(flac))==='image/png');
@@ -29,6 +29,13 @@ audio.paused=false;p.visualMode='static';api.syncVisual();check('static no proce
 p.visualMode='spectrum';document.hidden=true;api.syncVisual();check('hidden tab no processing',!api.active());
 document.hidden=false;api.syncVisual();check('resume connects',api.active()&&connected===disconnected+1);
 api.stopVisual();check('stop disconnects',!api.active()&&connected===disconnected);
+const state={};api.resetShake(state);for(let i=0;i<60;i++)api.shakeStep(state,-100,1/30);
+let hit=api.shakeStep(state,-35,1/30);check('strong bass impulse expands artwork',hit.scale>=1.15&&hit.scale<=1.18&&Math.abs(hit.x)<=1);
+let after=api.shakeStep(state,-35,1/30);check('elastic rebound',Math.abs(after.x)<Math.abs(hit.x)&&after.scale<hit.scale);
+for(let i=0;i<45;i++)after=api.shakeStep(state,-35,1/30);check('steady bass settles without fake shake',after.scale===1&&after.x===0);
+for(let i=0;i<10;i++)api.shakeStep(state,-78,1/30);hit=api.shakeStep(state,-55,1/30);check('quieter bass onset still reacts',hit.scale>1.1);
+for(let i=0;i<20;i++)after=api.shakeStep(state,-100,1/30);check('silence returns to rest',after.scale===1&&after.x===0);
+api.resetShake(state);check('track or pause reset',state.pulse===0&&state.age===1);
 return checks;
 }
 if(typeof require!=='undefined'&&typeof module!=='undefined'&&require.main===module)console.log('PASS',testVisual(fs.readFileSync(path.join(__dirname,'index.html'),'utf8')));
