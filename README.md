@@ -12,9 +12,15 @@ The audio engine was built from Shield-77's own projects, [Shield DJ Lite](https
 
 Created as a free personal project to share with friends who use Chromebooks, especially students. No system modification, developer mode or administrative access is required.
 
+## Download / Téléchargement
+
+**[Download the HTML player / Télécharger le lecteur HTML](https://github.com/Shield-77/Shield-DJ-Lite-Web/blob/main/index.html)** (on the GitHub file page, select **Download raw file**).
+
+Alternative: [download the complete ZIP](https://github.com/Shield-77/Shield-DJ-Lite-Web/archive/refs/heads/main.zip) and extract `index.html`.
+
 ## Getting started
 
-1. [Download the repository ZIP](https://github.com/Shield-77/Shield-DJ-Lite-Web/archive/refs/heads/main.zip) and extract it, or [download the standalone HTML](https://raw.githubusercontent.com/Shield-77/Shield-DJ-Lite-Web/main/index.html) (save the file locally). The complete GPLv3 license is also embedded in the HTML.
+1. Download `index.html` using one of the links above. The complete GPLv3 license is also embedded in the HTML.
 2. Open `index.html` in Chrome. No install, account, subscription or internet connection is required for playback.
 3. Choose a folder or individual MP3/OGG files. Check your system audio output and press LECTURE.
 
