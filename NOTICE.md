@@ -8,4 +8,4 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-See CREDITS.md for provenance, AI assistance, and third-party scope. The port adapts audio concepts from Shield DJ Lite and the Q16 PCM16 algorithm from Shield Theme Maker. Modified 2026-11-27.
+See CREDITS.md for provenance, AI assistance, and third-party scope. The port adapts audio concepts from Shield DJ Lite and the Q16 PCM16 algorithm from Shield Theme Maker. Modified 2026-11-27, through v1.33 ENGINE REFINEMENT. The standalone HTML includes the complete GPLv3 license. No third-party audio recordings, 3DS assets, external codecs or AI models are included. Project: https://github.com/Shield-77/Shield-DJ-Lite-Web
