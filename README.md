@@ -2,7 +2,7 @@
 
 **Free, open-source, offline audio player and live remix studio for Chromebooks.**
 
-Version **1.21 AUDIO FOCUS** · GPL-3.0-only
+Version **1.22 LIBRARY FIX** · GPL-3.0-only
 
 Designed primarily for the **ASUS Chromebook CM14 (CM1406 series / CM1406CM4A, MediaTek Kompanio 540, 8 GB RAM, Mali-G57)** and ChromeOS/Chrome. It also targets modern desktop Chromium browsers. Shield-77 personally owns the target ASUS Chromebook and has tested the player on that physical device. Automated development tests were also conducted separately in headless Chromium and Node.js.
 
@@ -60,6 +60,10 @@ In headless Chromium at 48 kHz, the eight variants required 15–28% fewer impul
 Frequency selection is independent of every glitch mode, including ORIGINAL and 1–20 kHz. Granular modes react to a fast/slow envelope detector, with randomized fallback timing, variable grain sizes and durations and nonrepeating consecutive pattern choices. This is lightweight onset detection, not a full beat tracker. Silent sections do not trigger new grains. The library displays only visible rows plus six extra rows on each side, preserving search, sort and shuffle independence. The current-track button locates the active song within the filtered list.
 
 Development validation: 63 synthetic stereo DSP scenarios across 44.1/48/96 kHz and three intensity settings, plus 15 sample-rate checks and 3 silence checks; output matched across 128 and 8192 frame chunks. 64 virtual-window bounds cases passed. These were JavaScript logic tests, not physical Chromebook listening tests.
+
+## Library display (v1.22)
+
+Continuous virtual scrolling now uses normal-flow spacers. Row numbers follow the displayed order, titles appear above their modification dates, and alphabetical sorting uses the file name rather than the folder path. Recent-first and oldest-first sorting remain available; unknown dates are placed last. Playback and shuffle are unchanged. Tested sorting in JavaScript and the updated list renderer in a representative Chromium layout with 5,000 synthetic entries, at four viewport sizes and three scroll positions each. The complete player on physical ChromeOS has not been retested.
 
 ## Audio focus (v1.21)
 
