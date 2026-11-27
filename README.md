@@ -2,11 +2,11 @@
 
 **Free, open-source, offline audio player and live remix studio for ChromeOS.**
 
-![Version](https://img.shields.io/badge/version-1.34-76d7f5)
+![Version](https://img.shields.io/badge/version-1.35-76d7f5)
 ![License](https://img.shields.io/badge/license-GPL--3.0--only-blue)
 ![Runtime](https://img.shields.io/badge/runtime-local%20HTML-92dca4)
 
-**v1.34 ADAPTIVE ENGINE** · Classic interface · Single HTML file · No installation
+**v1.35 STABILITY UPDATE** · Classic interface · Single HTML file · No installation
 
 [Download ZIP](https://github.com/Shield-77/Shield-DJ-Lite-Web/archive/refs/heads/main.zip) · [Download HTML](https://github.com/Shield-77/Shield-DJ-Lite-Web/blob/main/index.html) · [Source history](https://github.com/Shield-77/Shield-DJ-Lite-Web/commits/main/) · [Issues](https://github.com/Shield-77/Shield-DJ-Lite-Web/issues)
 
@@ -89,9 +89,21 @@ AudioWorklet is preferred. The fallback uses a ScriptProcessor buffer of 8192 fr
 
 No telemetry, upload, external fonts, bundled music, model weights or network requests in the standalone player. Files remain local; settings are stored in the browser when allowed. Reopen the folder after closing the browser. Diagnostic reports are exported manually. The README badges are hosted by Shields.io and are not dependencies of the HTML player.
 
+## 1.35 stability maintenance
+
+No new audio effects or EQ curves: this update focuses on the existing audio graph.
+
+- AudioWorklet processor failures switch to the native/fallback audio path instead of leaving a failed processor in the graph.
+- The 8192-frame fallback keeps the original signal audible until two processed buffers have arrived, and schedules the transition using the audio playback clock. When disabled, it fades out before disconnecting.
+- Fallback processing exceptions restore the original signal and record the error in the diagnostic report. Reverb setup failures also restore the direct signal.
+- Reverb disposal is idempotent and tolerates cleanup errors.
+
+Validation for 1.35: JavaScript syntax checked; 15 simulated audio-graph recovery/cleanup assertions, 63 synthetic DSP scenarios and 15 resampling checks passed. The graph tests use test doubles, not an actual AudioContext. Real Chromium playback, sustained playback and testing this specific version on the target Chromebook are still required. ScriptProcessor remains a main-thread fallback and cannot guarantee gap-free playback under load.
+
 ## Development and testing
 
 - [index.html](index.html): complete playable source, styles and DSP.
+- [test-stability.cjs](test-stability.cjs): run with `node test-stability.cjs`; deterministic recovery and cleanup tests using audio graph doubles.
 - [test-dsp.cjs](test-dsp.cjs): run with `node test-dsp.cjs`; synthetic stereo tests and separate resampling checks.
 - [test-browser.py](test-browser.py): run with `python test-browser.py`; requires Python, Playwright, Chromium and FFmpeg. Set `CHROMIUM_PATH` if needed.
 - [DEVELOPMENT.md](DEVELOPMENT.md): historical engineering notes and limitations.
