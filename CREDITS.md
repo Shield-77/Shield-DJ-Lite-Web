@@ -14,6 +14,12 @@ Native browser APIs: [Web Audio](https://developer.mozilla.org/en-US/docs/Web/AP
 
 The original 3DS projects retain their own attribution files. The illustration credited to **kamrikeen** in the Shield DJ Lite README is not included in this Web player. No permission to redistribute that artwork is asserted.
 
+## Visual Studio (v1.38)
+
+- SHIELD DJ Lite fallback logo: provided by Shield-77 for this project. The supplied 256 × 128 artwork is embedded as a compressed WebP copy, used as the default local display. Original visual identity and rights remain with their respective holders; no additional third-party artwork is included.
+- Local cover artwork is user-supplied media or extracted from the user's audio metadata. The player does not download, publish or redistribute users' covers.
+- Metadata parser, Canvas display, vinyl animation and bass-reactive movement: project-specific AI-assisted implementation using browser APIs. No external metadata or visualization library bundled.
+
 ## Scope
 
 The app's own source is distributed under **GNU GPL version 3 only** (SPDX: GPL-3.0-only). No warranty. See the complete [LICENSE](LICENSE). No minimp3, Tremor, libogg, libctru, Kame Tools code, 3DS binaries, proprietary fonts, logos or music from the original projects are bundled in this web package. Their separate licenses and attributions remain in their upstream projects; this package does not relicense those components.
