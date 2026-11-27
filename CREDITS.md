@@ -22,7 +22,7 @@ The original 3DS projects retain their own attribution files. The illustration c
 
 ## Scope
 
-The app's own source is distributed under **GNU GPL version 3 only** (SPDX: GPL-3.0-only). No warranty. See the complete [LICENSE](LICENSE). No minimp3, Tremor, libogg, libctru, Kame Tools code, 3DS binaries, proprietary fonts, logos or music from the original projects are bundled in this web package. Their separate licenses and attributions remain in their upstream projects; this package does not relicense those components.
+The app's own source is distributed under **GNU GPL version 3 only** (SPDX: GPL-3.0-only). No warranty. See the complete [LICENSE](LICENSE). No minimp3, Tremor, libogg, libctru, Kame Tools code, 3DS binaries, proprietary fonts or music from the original projects are bundled in this web package. The supplied SHIELD fallback logo is the artwork exception noted above. Their separate licenses and attributions remain in their upstream projects; this package does not relicense those components.
 
 For the upstream third-party notices, consult the original [Shield DJ Lite credits](https://github.com/Shield-77/Shield-DJ-Lite#licence-et-cr%C3%A9dits) and [Shield Theme Maker README](https://github.com/Shield-77/Shield-Theme-Maker/blob/main/README.md). Thanks to those authors and contributors. The software does not grant rights to any songs imported by users or trademarks of third parties. No official affiliation with browser or hardware vendors is claimed.
 
