@@ -2,7 +2,7 @@
 
 **Free, open-source, offline audio player and live remix studio for Chromebooks.**
 
-Version **1.29 POP ROCK STUDIO** · GPL-3.0-only
+Version **1.30 CONCERT LIVE** · GPL-3.0-only
 
 Designed primarily for the **ASUS Chromebook CM14 (CM1406 series / CM1406CM4A, MediaTek Kompanio 540, 8 GB RAM, Mali-G57)** and ChromeOS/Chrome. It also targets modern desktop Chromium browsers. Shield-77 personally owns the target ASUS Chromebook and has tested the player on that physical device. Automated development tests were also conducted separately in headless Chromium and Node.js.
 
@@ -98,6 +98,14 @@ Validation: 180 mock EQ parameter checks across nine preset selections and 6,144
 ## POP ROCK STUDIO (v1.29)
 
 Independent hybrid EQ combining POP STUDIO and ROCK STUDIO characteristics. Seven existing native EQ nodes, +2.4 dB punch at 130 Hz, -2.6 dB at 315 Hz, +1.2 dB at 1.05 kHz, +2.8 dB presence at 2.55 kHz and +2.2 dB high shelf at 9.5 kHz, with -4.5 dB headroom. Smooth 45 ms parameter time constants retained. Bass, reverb, pitch and existing EQ profiles are unchanged. The new profile does not activate the voice/instrument focus path. Validation: 220 mock parameter checks across 11 preset selections, two compressor checks and 6,144 analytical frequency-response points across 44.1/48/96 kHz. Maximum predicted steady-state response after headroom: -1.61/-1.61/-1.62 dB respectively. Not a real audio render, listening test or physical Chromebook performance measurement.
+
+## CONCERT LIVE (v1.30)
+
+An additional concert-reference-inspired reverb, leaving the original CONCERT and all other presets intact. LIVE uses a synthesized 1.15 s stereo impulse, 20 ms pre-delay, 34% wet gain, 9 ms reflection spread and frequency-dependent decay. Two cascaded one-pole high-pass stages at 150 Hz and a one-pole low-pass at 7.6 kHz shape the impulse at creation time only; direct audio and the existing native convolution graph are unchanged. LONG extends the impulse by 1.4x. The cache and transition logic remain the same.
+
+Reference: a privately supplied MP3 of a concert performance. Its measured side/mid energy ratio was -15.58 dB at 80–320 Hz and -4.11 dB at 1.2–4.8 kHz. A mixed recording cannot determine the venue's exact impulse response; the profile is synthetic and not a measured recreation of the venue.
+
+Validation: 16 native Chromium OfflineAudioContext renders of four eight-second excerpts (wet-only and dry+wet, old and new modes), isolated reverb stage without EQ, bass boost or compressor. Median wet-only 40–150 Hz energy relative to source changed from -11.38 to -21.06 dB, while 300–4800 Hz changed from -9.53 to -9.09 dB. Median dry+wet render time was 53.75 ms vs 70.55 ms. The decoded MP3 itself exceeded full scale (peak 1.1005); dry+wet test samples above full scale decreased from 54 to 10 across the four excerpts, but were not eliminated. Thirty additional impulse-generation checks covered all five enabled reverb presets at 44.1/48/96 kHz with and without LONG. The LIVE impulse occupies 441600 bytes at 48 kHz, or 618240 bytes in LONG mode. These tests do not measure actual Chromebook CPU use, complete playback-chain clipping, or subjective quality. No source music is redistributed.
 
 ## Audio notes
 
