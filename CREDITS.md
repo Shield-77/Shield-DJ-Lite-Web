@@ -8,9 +8,9 @@
 - QR image: static SVG for the repository URL. No QR generation library is shipped or required at runtime.
 - Development and tests used Node.js and Python/Playwright/FFmpeg; those tools are not bundled in the player and retain their own licenses.
 
-## Web implementation (v1.33)
+## Web implementation (v1.34)
 
-Native browser APIs: [Web Audio](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API), [AudioWorklet](https://developer.mozilla.org/en-US/docs/Web/API/AudioWorklet), [HTMLMediaElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement) and [File API](https://developer.mozilla.org/en-US/docs/Web/API/File_API). These are platform facilities, not bundled dependencies. The reverb impulses are synthesized by the app. No concert recordings, training data, pretrained models or game assets are shipped. Music used in private testing is not part of the distribution.
+Native browser APIs: [Web Audio](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API), [AudioWorklet](https://developer.mozilla.org/en-US/docs/Web/API/AudioWorklet), [HTMLMediaElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement) and [File API](https://developer.mozilla.org/en-US/docs/Web/API/File_API). These are platform facilities, not bundled dependencies. The reverb impulses are synthesized by the app. AUTO STUDIO uses native spectral analysis and a bounded heuristic controller; no neural model is trained or bundled. No concert recordings, training data, pretrained models or game assets are shipped. Music used in private testing is not part of the distribution.
 
 The original 3DS projects retain their own attribution files. The illustration credited to **kamrikeen** in the Shield DJ Lite README is not included in this Web player. No permission to redistribute that artwork is asserted.
 
