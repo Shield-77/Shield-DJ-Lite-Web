@@ -2,7 +2,7 @@
 
 **Free, open-source, offline audio player and live remix studio for Chromebooks.**
 
-Version **1.16 SMART SEARCH** · GPL-3.0-only
+Version **1.17 ROCK STUDIO** · GPL-3.0-only
 
 Designed primarily for the **ASUS Chromebook CM14 (CM1406 series / CM1406CM4A, MediaTek Kompanio 540, 8 GB RAM, Mali-G57)** and ChromeOS/Chrome. It also targets modern desktop Chromium browsers. Shield-77 personally owns the target ASUS Chromebook and has tested the player on that physical device. Automated development tests were also conducted separately in headless Chromium and Node.js.
 
@@ -29,7 +29,7 @@ Alternative: [download the complete ZIP](https://github.com/Shield-77/Shield-DJ-
 - Native MP3 and OGG Vorbis playback; additional formats depend on browser support.
 - Recursive folder import, shuffle without repetition within a cycle, flexible case/accent-insensitive search with partial words, arbitrary word order and limited typo tolerance; newest-first sorting by modification date.
 - Pitch and speed linked, 0.25x–2x; Q16/PCM16 resampling 2–20 kHz in 1 kHz steps, plus original mode.
-- Five-band ROCK HD EQ, bass boost, audio boost, stereo convolution reverb, bitcrusher.
+- Seven-band ROCK STUDIO EQ, bass boost, audio boost, stereo convolution reverb, bitcrusher.
 - Glitch 6 kHz, Tape Wobble, Ghost Echo, Robot, Reverse Grains, and **Buffer Shatter 6 kHz**: random grain reordering, reverse, half-speed and double-speed fragments, with short crossfades and continuous transport.
 - Three-column PC layout with scrollable library; fullscreen toggle.
 - Playback error recovery: skip unreadable files, stop when none are playable. Import does not start playback automatically.
@@ -44,7 +44,7 @@ Alternative: [download the complete ZIP](https://github.com/Shield-77/Shield-DJ-
 | U / O | Previous / next |
 | S / X / B | Shuffle / repeat / stop |
 
-## Smart search (v1.16)
+## Smart search (introduced in v1.16)
 
 Search file names and paths using fragments or words in any order. For example, `side clickbait`, `bait`, `clikbait`, and `CLICKBAIT` all match `Clickbait - C-Side.mp3`. Accents, punctuation and case are normalized. Limited typo tolerance applies to words of five or more characters. Date sorting and shuffle remain independent. Matching is local; no music tags or online metadata are fetched.
 
@@ -52,7 +52,7 @@ Search file names and paths using fragments or words in any order. For example, 
 
 AudioWorklet is preferred. If unavailable, the player falls back to a ScriptProcessor buffer of 8192 frames, using the same DSP core. This fallback may have more control latency or occasional dropouts. The browser may mute very slow playback on some platforms. The app uses the system audio output: unplugging headphones can switch sound to speakers. Start with a low volume, especially with distortion, boost and headphones.
 
-ROCK HD uses a 105 Hz low shelf (+2.5 dB), a 320 Hz cut (-2.5 dB), 1550 Hz (+2.4 dB), 3400 Hz (+2 dB), a 7600 Hz high shelf (+1.5 dB) and -4.5 dB input headroom, with dynamics protection. The result is a relative EQ emphasis, not a guarantee of higher loudness or of perfect separation of instruments.
+ROCK STUDIO (v1.17) is tuned for energetic guitar-driven rock: 85 Hz low shelf (+1.8 dB), 130 Hz punch (+3 dB), 310 Hz cut (-3.2 dB), 1150 Hz (+1.7 dB), 2600 Hz (+3.5 dB), 4800 Hz harshness cut (-2 dB) and 9000 Hz high shelf (+2 dB), with -5 dB input headroom. The seven bands use native Web Audio filters. When no other heavy effects are active, a 2.5:1 compressor with 12 ms attack and 110 ms release helps retain transients. At 48 kHz, the measured combined EQ (before headroom) is +2.71 dB at 130 Hz, +3.69 dB at 2.6 kHz and -0.45 dB at 4.8 kHz. Headroom keeps the peak frequency response below unity across the three tested sample rates. Four five-second local musical excerpts rendered without sample clipping in an offline Chromium test; music is not redistributed. These are measurements, not a guarantee of listening preference or real-device performance. Additional boost/FX can change levels.
 
 ## Privacy and tests
 
@@ -69,5 +69,7 @@ Free of charge, open source under **GNU GPL v3 only**. See [LICENSE](LICENSE), [
 ## Français
 
 Lecteur et laboratoire de remix entièrement local, conçu en priorité pour les Chromebook ASUS CM14. Je possède moi-même ce Chromebook et j'ai testé le lecteur directement sur mon propre appareil. Le moteur audio a été construit à partir des concepts de mes propres projets Shield DJ Lite et Shield Theme Maker, adaptés aux API audio de Chrome. Le projet est gratuit et libre, avec le code source fourni. ChatGPT a participé au développement du port Web. Aucun abonnement ni service payant n'est nécessaire.
+
+Le filtre ROCK STUDIO utilise sept bandes natives, une marge de 5 dB et une compression plus douce lorsque les effets lourds sont désactivés. Il privilégie les impacts de batterie et la présence des guitares sans amplifier exagérément les aigus.
 
 Ouvre `index.html`, importe un dossier MP3/OGG et lance la lecture. F = plein écran, H = Buffer Shatter, G = Glitch, flèches = fréquence/pitch. Aucun morceau n'est fourni. Les tests ne garantissent pas l'absence de microcoupures sur toutes les machines.
