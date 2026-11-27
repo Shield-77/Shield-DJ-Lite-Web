@@ -37,7 +37,9 @@ Shield-77 chooses the features, creative direction and interface, and tests the 
 
 No installer, account, subscription, server, developer mode or administrator access is required. Playback works offline. The HTML includes its full GPLv3 license. No music is supplied.
 
-[![Repository QR code](qr.svg)](https://github.com/Shield-77/Shield-DJ-Lite-Web)
+[![Download latest SHIELD DJ Lite Web ZIP (QR code)](qr.svg)](https://github.com/Shield-77/Shield-DJ-Lite-Web/archive/refs/heads/main.zip)
+
+Scan to download the current main-branch ZIP, including v1.43 STUDIO ROOM. The same QR code remains valid for subsequent main-branch updates.
 
 ## Audio studio
 
