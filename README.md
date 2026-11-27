@@ -2,11 +2,11 @@
 
 **Free, open-source, offline audio player and live remix studio for ChromeOS.**
 
-![Version](https://img.shields.io/badge/version-1.35-76d7f5)
+![Version](https://img.shields.io/badge/version-1.36-76d7f5)
 ![License](https://img.shields.io/badge/license-GPL--3.0--only-blue)
 ![Runtime](https://img.shields.io/badge/runtime-local%20HTML-92dca4)
 
-**v1.35 STABILITY UPDATE** · Classic interface · Single HTML file · No installation
+**v1.36 STREAMLINED** · Classic interface · Single HTML file · No installation
 
 [Download ZIP](https://github.com/Shield-77/Shield-DJ-Lite-Web/archive/refs/heads/main.zip) · [Download HTML](https://github.com/Shield-77/Shield-DJ-Lite-Web/blob/main/index.html) · [Source history](https://github.com/Shield-77/Shield-DJ-Lite-Web/commits/main/) · [Issues](https://github.com/Shield-77/Shield-DJ-Lite-Web/issues)
 
@@ -30,13 +30,12 @@ No installer, account, subscription, server, developer mode or administrator acc
 
 | Feature | Details |
 | --- | --- |
-| Pitch and speed | Linked, 0.250x–2.000x, exact 0.001x grid; buttons and arrows advance one step. The display reads the actual browser playback rate. |
+| Pitch and speed | Linked, 0.250x–2.000x, 0.001x slider resolution; buttons and arrows advance by 0.025x. The display reads the actual browser playback rate. |
 | Quality | ORIGINAL bypass or 1–20 kHz in 1 kHz steps, Q16/PCM16 resampling adapted from Shield Theme Maker. Independent of pitch and glitch. |
 | EQ | ROCK STUDIO, POP STUDIO, POP ROCK STUDIO, AUTO STUDIO, Jazz, Clair, Extérieur, Classique; seven native filter nodes reused. |
 | BASS STUDIO | PUNCH, DEEP BASS, ROCK DRIVE, DEEP + PUNCH; separate low, impact and corrective bands. |
 | Reverb | Stereo synthesized convolution, CONCERT, CONCERT LIVE, CATHEDRALE, EXTRA and LIBRE. Optional LONG mode. |
 | Glitch Lab | Adaptive Glitch, Tape Wobble, Ghost Echo, Robot, Reverse Grains, Buffer Shatter; adjustable intensity. |
-| Digital Crush | Bit reduction and sample-hold through AudioWorklet; bit reduction alone in the WaveShaper fallback. |
 | Audio focus | Experimental VOICE ONLY and INSTRUMENT ONLY, based on stereo and frequency filtering, not AI source separation. |
 
 CONCERT LIVE is inspired by measurements of a privately supplied concert recording. It is a synthetic room response, not a measured reconstruction of the venue. No recording is included. Smooth parameter transitions and output dynamics protection are retained; they are not a guarantee against clipping in every combination of effects.
@@ -53,7 +52,7 @@ CONCERT LIVE is inspired by measurements of a privately supplied concert recordi
 | --- | --- |
 | Space | Play / pause |
 | U / O | Previous / next |
-| Left / Right | Pitch -/+ 0.001x (Shift uses the same step) |
+| Left / Right | Pitch -/+ 0.025x (Shift uses the same step) |
 | Up / Down | Audio quality |
 | G / H | Adaptive Glitch / Buffer Shatter toggle |
 | S / X / B | Shuffle / repeat / stop |
@@ -66,7 +65,7 @@ The pitch reset restores exactly 1.000x. Holding a pitch arrow repeats after 350
 - Cache up to three sorted library index arrays; invalidate on folder import. Search no longer sorts the matching tracks again.
 - Reflect only the changed control instead of rebuilding all UI state on each slider event.
 - Hoist invariant remix calculations outside the sample loop; avoid repeated reset calls on empty worklet input.
-- Flush pending settings on page hide and avoid rebuilding the fallback crush curve unnecessarily.
+- Flush pending settings on page hide.
 - Keep the v1.32 CSS exactly; preserve the EQ curves, bass profiles, reverb impulse algorithms and exact pitch grid.
 
 **Validation for v1.33:** 63 synthetic comparisons with v1.32 at 44.1/48/96 kHz, with 23,700,600 identical stereo-channel samples across different block sizes; 15 search/sort cases over 5,000 synthetic tracks; 63 DSP regression scenarios and 15 standalone resampling tests executed in a JavaScript environment. No physical Chromebook CPU measurement or listening test was performed for this version. The browser test script was updated for the current pitch and independent glitch/quality behavior, but has not been rerun for v1.33.
@@ -85,9 +84,13 @@ Validation of the integrated code: JavaScript syntax, 1,002 adaptive controller 
 
 ## Runtime, privacy and limitations
 
-AudioWorklet is preferred. The fallback uses a ScriptProcessor buffer of 8192 frames for resampling/remix and WaveShaper for bit reduction; fallback timing may differ. The app uses the system audio output, and headphone disconnection can switch sound to speakers. Start at a moderate volume, especially when using boost or headphones.
+AudioWorklet is preferred. The fallback uses a ScriptProcessor buffer of 8192 frames for resampling/remix; fallback timing may differ. The app uses the system audio output, and headphone disconnection can switch sound to speakers. Start at a moderate volume, especially when using boost or headphones.
 
 No telemetry, upload, external fonts, bundled music, model weights or network requests in the standalone player. Files remain local; settings are stored in the browser when allowed. Reopen the folder after closing the browser. Diagnostic reports are exported manually. The README badges are hosted by Shields.io and are not dependencies of the HTML player.
+
+## 1.36 streamlined
+
+Removed the Digital Crush effect, its controls and its separate audio processor. RESET FX, all Glitch Lab effects and the resampling engine remain. Pitch buttons and arrows now change speed by 0.025x, while the slider keeps its 0.001x resolution. Syntax, 10 pitch/structure checks and 15 simulated recovery checks passed; physical-device playback has not yet been retested.
 
 ## 1.35 stability maintenance
 
@@ -127,7 +130,7 @@ The Web player's own source is licensed under **GNU GPL version 3 only (GPL-3.0-
 
 **Lecteur audio et studio de remix gratuit, libre et entièrement local**, conçu en priorité pour les Chromebook ASUS CM14. L'interface classique est conservée. Le moteur s'inspire de Shield DJ Lite et de Shield Theme Maker, avec une adaptation aux API natives de Chrome.
 
-[Télécharger le ZIP](https://github.com/Shield-77/Shield-DJ-Lite-Web/archive/refs/heads/main.zip), extraire `index.html`, l'ouvrir dans Chrome et importer ses fichiers. Pas d'installation ni de connexion requise pour écouter. Les boutons −/+ et les flèches avancent toujours de 0,001×. Les effets audio, les profils de basses et la réverbération restent disponibles.
+[Télécharger le ZIP](https://github.com/Shield-77/Shield-DJ-Lite-Web/archive/refs/heads/main.zip), extraire `index.html`, l'ouvrir dans Chrome et importer ses fichiers. Pas d'installation ni de connexion requise pour écouter. Les boutons −/+ et les flèches avancent de 0,025× ; le curseur tactile ou souris garde une résolution de 0,001×. Crush / Digital Remix a été retiré, mais RESET FX et le Glitch Lab sont conservés. Les effets audio, les profils de basses et la réverbération restent disponibles.
 
 Je possède moi-même le Chromebook cible et j'ai testé le lecteur sur cet appareil (versions précédentes). Je choisis les fonctionnalités et réalise les essais ; ChatGPT m'aide à développer le port Web, tandis que Codex a participé aux projets 3DS d'origine. Le projet est conçu pour partager, pas pour imposer un abonnement.
 
