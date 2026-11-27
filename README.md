@@ -12,8 +12,7 @@
 
 ## What's new in 1.43 STUDIO ROOM
 
-- STUDIO ROOM: a new short, fully wet room preset based on Shield-77's own LIBRE settings (0.30 s, natural tone, zero pre-delay, 100% mix). Bass and EQ remain independent.
-
+- STUDIO ROOM: a new short, fully wet room preset based on Shield-77's own LIBRE settings (0.30 s, natural tone, zero pre-delay, 100% mix), confirmed by the creator's listening test. Bass and EQ remain independent.
 - Faster bass-reactive SHAKE: up to 60 updates per second, shorter FFT window and improved transient detection.
 - The visualizer listens to the final processed audio, including EQ, bass shaping, quality reduction, remix, reverb, compression and volume.
 - Larger, slower VINYL display with an expandable deck.
@@ -116,7 +115,7 @@ No telemetry, upload, external fonts, bundled music, model weights or network re
 
 STUDIO ROOM reproduces the exact LIBRE reverb settings selected by Shield-77: 0.30 s duration, NATURAL tone, 0 ms pre-delay, 100% wet mix. It shares the same impulse generation and cache key as these LIBRE settings. The preset does not overwrite custom LIBRE preferences, bass profiles, EQ, pitch or volume. LONG is disabled for this fixed room. For the original listening combination, select DEEP + PUNCH and POP ROCK STUDIO independently. This is a synthetic room, not an acoustic measurement of a physical studio.
 
-Validation: exact room parameter equality and 112,860 identical finite impulse samples across 44.1, 48 and 96 kHz; JavaScript syntax and 15 recovery checks passed. Physical playback has not yet been verified for this version.
+Validation: exact room parameter equality and 112,860 identical finite impulse samples across 44.1, 48 and 96 kHz; JavaScript syntax and 15 recovery checks passed. Shield-77 subsequently confirmed by listening on their Chromebook that STUDIO ROOM reproduces the desired room sound. This is a subjective listening confirmation, not a measured physical acoustic or latency test.
 
 ## 1.42 Beat Sync
 
