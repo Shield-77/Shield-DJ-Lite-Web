@@ -2,11 +2,11 @@
 
 **Free, open-source, offline audio player and live remix studio for ChromeOS.**
 
-![Version](https://img.shields.io/badge/version-1.36-76d7f5)
+![Version](https://img.shields.io/badge/version-1.37-76d7f5)
 ![License](https://img.shields.io/badge/license-GPL--3.0--only-blue)
 ![Runtime](https://img.shields.io/badge/runtime-local%20HTML-92dca4)
 
-**v1.36 STREAMLINED** · Classic interface · Single HTML file · No installation
+**v1.37 ROCK & FREE ROOM** · Classic interface · Single HTML file · No installation
 
 [Download ZIP](https://github.com/Shield-77/Shield-DJ-Lite-Web/archive/refs/heads/main.zip) · [Download HTML](https://github.com/Shield-77/Shield-DJ-Lite-Web/blob/main/index.html) · [Source history](https://github.com/Shield-77/Shield-DJ-Lite-Web/commits/main/) · [Issues](https://github.com/Shield-77/Shield-DJ-Lite-Web/issues)
 
@@ -32,9 +32,9 @@ No installer, account, subscription, server, developer mode or administrator acc
 | --- | --- |
 | Pitch and speed | Linked, 0.250x–2.000x, 0.001x slider resolution; buttons and arrows advance by 0.025x. The display reads the actual browser playback rate. |
 | Quality | ORIGINAL bypass or 1–20 kHz in 1 kHz steps, Q16/PCM16 resampling adapted from Shield Theme Maker. Independent of pitch and glitch. |
-| EQ | ROCK STUDIO, POP STUDIO, POP ROCK STUDIO, AUTO STUDIO, Jazz, Clair, Extérieur, Classique; seven native filter nodes reused. |
+| EQ | ROCK STUDIO (adaptive), POP STUDIO, POP ROCK STUDIO, AUTO STUDIO, Jazz, Clair, Extérieur, Classique; seven native filter nodes reused. |
 | BASS STUDIO | PUNCH, DEEP BASS, ROCK DRIVE, DEEP + PUNCH; separate low, impact and corrective bands. |
-| Reverb | Stereo synthesized convolution, CONCERT, CONCERT LIVE, CATHEDRALE, EXTRA and LIBRE. Optional LONG mode. |
+| Reverb | Stereo synthesized convolution, CONCERT, CONCERT LIVE, CATHEDRALE, EXTRA and LIBRE. LIBRE has independent mix (0–100%), duration (0.30–5.00 s), tone and pre-delay (0–100 ms). LONG remains available for fixed presets. |
 | Glitch Lab | Adaptive Glitch, Tape Wobble, Ghost Echo, Robot, Reverse Grains, Buffer Shatter; adjustable intensity. |
 | Audio focus | Experimental VOICE ONLY and INSTRUMENT ONLY, based on stereo and frequency filtering, not AI source separation. |
 
@@ -87,6 +87,14 @@ Validation of the integrated code: JavaScript syntax, 1,002 adaptive controller 
 AudioWorklet is preferred. The fallback uses a ScriptProcessor buffer of 8192 frames for resampling/remix; fallback timing may differ. The app uses the system audio output, and headphone disconnection can switch sound to speakers. Start at a moderate volume, especially when using boost or headphones.
 
 No telemetry, upload, external fonts, bundled music, model weights or network requests in the standalone player. Files remain local; settings are stored in the browser when allowed. Reopen the folder after closing the browser. Diagnostic reports are exported manually. The README badges are hosted by Shields.io and are not dependencies of the HTML player.
+
+## 1.37 Rock & Free Room
+
+ROCK STUDIO now uses the existing native analyser and four bounded corrections on top of a gentler seven-band curve. Offline calibration used 190 complete five-second windows across four reference recordings (Wet Floor compilation, Sea Me Now, Triple Dip, Clickbait), with stereo mean Welch spectra at 24 kHz. No recordings, models, or training assets are distributed. These are heuristic settings, not a trained model or source separation. Compression is gentler unless other heavy effects are enabled.
+
+LIBRE offers independent 0–100% equal-power mix, seven durations from 0.30 to 5.00 s, three tone choices and five pre-delays from 0 to 100 ms. Mix changes reuse the existing impulse; other settings rebuild it on selection. Cached impulses remain subject to the 3 MiB budget. At 100% mix the direct path is silent. Earlier saved LIBRE percentages now represent the actual mix, rather than a 65% maximum.
+
+JavaScript syntax, 15 calibration/room/structure checks and 15 simulated recovery checks passed. Browser layout, real playback, listening quality and RAM consumption still require device verification.
 
 ## 1.36 streamlined
 
