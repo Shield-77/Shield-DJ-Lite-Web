@@ -2,11 +2,11 @@
 
 **Free, open-source, offline audio player and live remix studio for ChromeOS.**
 
-![Version](https://img.shields.io/badge/version-1.37-76d7f5)
+![Version](https://img.shields.io/badge/version-1.38-76d7f5)
 ![License](https://img.shields.io/badge/license-GPL--3.0--only-blue)
 ![Runtime](https://img.shields.io/badge/runtime-local%20HTML-92dca4)
 
-**v1.37 ROCK & FREE ROOM** · Classic interface · Single HTML file · No installation
+**v1.38 VISUAL STUDIO** · Classic interface · Single HTML file · No installation
 
 [Download ZIP](https://github.com/Shield-77/Shield-DJ-Lite-Web/archive/refs/heads/main.zip) · [Download HTML](https://github.com/Shield-77/Shield-DJ-Lite-Web/blob/main/index.html) · [Source history](https://github.com/Shield-77/Shield-DJ-Lite-Web/commits/main/) · [Issues](https://github.com/Shield-77/Shield-DJ-Lite-Web/issues)
 
@@ -87,6 +87,14 @@ Validation of the integrated code: JavaScript syntax, 1,002 adaptive controller 
 AudioWorklet is preferred. The fallback uses a ScriptProcessor buffer of 8192 frames for resampling/remix; fallback timing may differ. The app uses the system audio output, and headphone disconnection can switch sound to speakers. Start at a moderate volume, especially when using boost or headphones.
 
 No telemetry, upload, external fonts, bundled music, model weights or network requests in the standalone player. Files remain local; settings are stored in the browser when allowed. Reopen the folder after closing the browser. Diagnostic reports are exported manually. The README badges are hosted by Shields.io and are not dependencies of the HTML player.
+
+## 1.38 Visual Studio
+
+The spare space in the effects panel now contains local cover art and four display modes: SPECTRUM (40 logarithmic bands from a native FFT after the effects and volume), SHAKE (bounded movement on bass transients), VINYL (rotating record with cover in its label, speed linked to playback rate) and STATIC (no animation or analysis). Visual updates are capped at approximately 30 fps. Animation and the analyser connection stop when paused, hidden, static, stopped or reduced-motion is requested; vinyl requires no analyser.
+
+Artwork is read only for the selected track. Supported embedded images are MP3 ID3 APIC/PIC, FLAC PICTURE and Ogg Vorbis/Opus METADATA_BLOCK_PICTURE. Local JPEG, PNG or WebP sidecar images may also be imported alongside audio: same stem, cover, folder, front or album in the same folder. Unsupported or absent artwork falls back to the supplied SHIELD DJ Lite logo, embedded as a 2.9 KB WebP, fitted without stretching. The original source image remains unmodified; no web requests, online album lookup or third-party metadata library. Reads are capped at 4 MiB; images larger than 16 megapixels are rejected. The current artwork URL is released when tracks change. M4A embedded artwork is not yet supported; sidecars still work.
+
+16 mocked parser and visual lifecycle checks pass. The audio DSP and graph initialization are unchanged. Real browser layout, perceived synchronization and RAM/CPU use require device testing.
 
 ## 1.37 Rock & Free Room
 
